@@ -1,0 +1,18 @@
+context_parser: pypyr.parser.keyvaluepairs
+steps:
+  - name: pypyr.steps.echo
+    in:
+      echoMe: Starting workflow
+  - name: pypyr.steps.cmd
+    in:
+      cmd: black .
+  - name: pypyr.steps.cmd
+    run: '{message}'
+    in:
+      cmd: git add . & git commit -m "{message}"
+  - name: pypyr.steps.cmd
+    in:
+      cmd: git push -u origin main
+      
+
+  
