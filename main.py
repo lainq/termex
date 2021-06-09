@@ -2,6 +2,7 @@ import sys
 import os
 
 from exception import CommandLineException
+from list import ListDirectories
 
 class File(object):
     def __init__(self, filename):
@@ -35,7 +36,7 @@ def main():
     file_object = File(filename)
     if not file_object.exists:
         CommandLineException(f"{filename} does not exist")
-    print("LO")
+    _ = ListDirectories(file_object)
 
 if __name__ == "__main__":
     result = main()
