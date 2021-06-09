@@ -5,18 +5,19 @@ import pathlib
 import time
 from main import giveout
 
-table = Table(title="Expoterm")
+table = Table(title="Expoterm", style="green")
 table.add_column("Name", justify="right", style="cyan", no_wrap=True)
 table.add_column("Type", style="yellow")
 table.add_column("Extension", style="magenta")
-table.add_column("Size", style="yellow")
-table.add_column("Modified", justify="right", style="green")
+table.add_column("Size(kb)", style="yellow")
+table.add_column("Modified", justify="right", style="magenta")
  
-path = "."
+path = giveout()
 dir_list = os.listdir(path)
 length = len(dir_list)
 x = 0
 while x < length:
+    console = Console()
     name = dir_list[x]
     size = os.path.getsize(name)
     stats = os.stat(name)
@@ -31,10 +32,9 @@ while x < length:
             extension = name
     modification = time.ctime(os.path.getmtime(name))
 
-    table.add_row(str(name), type, extension, str(size), str(modification))
-    print(name)
+    table.add_row(str(name), type, extension, str(size), str(modification)) 
     x=x+1
 
-console = Console()
+
 console.print(table)
  
