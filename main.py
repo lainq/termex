@@ -30,9 +30,7 @@ def capture_filename(arguments):
     elif filename == "..":
         return os.path.dirname(current_directory)
 
-
-def giveout():
+def main():
     filename = capture_filename(sys.argv[1:])
-    file = File(filename)
-    print(filename)
+    file_object = File(filename)
     
