@@ -31,6 +31,7 @@ def capture_filename(arguments):
         return os.path.dirname(current_directory)
 
 
-filename = capture_filename(sys.argv[1:])
-file = File(filename)
-print(filename)
+def giveout():
+    filename = capture_filename(sys.argv[1:])
+    file = File(filename)
+    print(filename)
