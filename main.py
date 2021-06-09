@@ -1,6 +1,7 @@
 import sys
 import os
 
+from exception import CommandLineException
 
 class File(object):
     def __init__(self, filename):
@@ -19,18 +20,23 @@ class File(object):
         return os.stat(self.filename).st_size
 
 
-def capture_filename(arguments):
-    current_directory = os.getcwd()
-    if len(arguments) == 0:
-        return current_directory
-
-    filename = arguments[0]
-    if filename == ".":
-        return current_directory
-    elif filename == "..":
-        return os.path.dirname(current_directory)
-
 def main():
-    filename = capture_filename(sys.argv[1:])
+    arguments = sys.argv[1:]
+    filename = None
+    if len(arguments) == 0:
+        filename = os.getcwd()
+    else:
+        filename = arguments[0]
+        if filename == ".":
+            filename = os.getcwd()
+        elif filename == "..":
+            filename = os.path.dirname(os.getcwd())
+
     file_object = File(filename)
-    
+    if not file_object.exists:
+        CommandLineException(f"{filename} does not exist")
+    print("LO")
+
+if __name__ == "__main__":
+    result = main()
+    print(result)

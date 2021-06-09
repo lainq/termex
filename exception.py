@@ -7,10 +7,10 @@ class CommandLineException(object):
 	default_error_message = "Something unexpected happened"
 
 	def __init__(self, message, suggestion=None, is_fatal=True, exit_status_code=None):
-		self.message = message or default_error_message
+		self.message = message or self.default_error_message
 		self.suggestion = suggestion
 		self.is_fatal = is_fatal
-		self.exit_status_code = exit_status_code or default_exit_status_code
+		self.exit_status_code = exit_status_code or self.default_exit_status_code
 
 		self.evoke_exception()
 
