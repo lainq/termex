@@ -14,7 +14,7 @@ class File(object):
     def is_directory(self):
         return os.path.isdir(self.filename)
 
-    @property
+    @property 
     def size(self):
         return os.stat(self.filename).st_size
 
