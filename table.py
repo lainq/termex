@@ -11,7 +11,7 @@ table.add_column("Type", style="yellow")
 table.add_column("Extension", style="magenta")
 table.add_column("Size(kb)", style="yellow")
 table.add_column("Modified", justify="right", style="magenta")
- 
+
 path = giveout()
 dir_list = os.listdir(path)
 length = len(dir_list)
@@ -21,7 +21,7 @@ while x < length:
     name = dir_list[x]
     size = os.path.getsize(name)
     stats = os.stat(name)
-    typeno =  stats.st_mode
+    typeno = stats.st_mode
     if typeno == 16877:
         type = "Folder"
         extension = " N/A"
@@ -32,9 +32,8 @@ while x < length:
             extension = name
     modification = time.ctime(os.path.getmtime(name))
 
-    table.add_row(str(name), type, extension, str(size), str(modification)) 
-    x=x+1
+    table.add_row(str(name), type, extension, str(size), str(modification))
+    x = x + 1
 
 
 console.print(table)
- 

@@ -4,6 +4,7 @@ import os
 from exception import CommandLineException
 from list import ListDirectories
 
+
 class File(object):
     def __init__(self, filename):
         self.filename = filename
@@ -16,7 +17,7 @@ class File(object):
     def is_directory(self):
         return os.path.isdir(self.filename)
 
-    @property 
+    @property
     def size(self):
         return os.stat(self.filename).st_size
 
@@ -37,6 +38,7 @@ def main():
     if not file_object.exists:
         CommandLineException(f"{filename} does not exist")
     _ = ListDirectories(file_object)
+
 
 if __name__ == "__main__":
     result = main()
