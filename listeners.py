@@ -7,6 +7,7 @@ from prompt import InputPrompt
 from bookmarks import Bookmarks
 from exception import CommandLineException
 
+
 class KeyboardEventListeners(object):
     @staticmethod
     def create_new_directory(folder_name="Folder"):
@@ -43,14 +44,16 @@ class KeyboardEventListeners(object):
         else:
             with open(path, "w") as file_writer:
                 file_writer.write("\n")
-            rprint(f"[green]Successfully created {path} [/green]")            
+            rprint(f"[green]Successfully created {path} [/green]")
 
     @staticmethod
     def __find_default_folder_name(folder_name):
         if not folder_name.startswith("Folder"):
             return folder_name
 
-        count = len(list(filter(lambda filename: filename.startswith("Folder"), os.listdir())))
+        count = len(
+            list(filter(lambda filename: filename.startswith("Folder"), os.listdir()))
+        )
         if count == 0:
             return folder_name
 

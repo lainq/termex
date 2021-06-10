@@ -4,6 +4,7 @@ import os
 from exception import CommandLineException
 from list import ListDirectories
 
+
 class File(object):
     def __init__(self, filename):
         self.filename = filename

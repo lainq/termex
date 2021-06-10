@@ -25,7 +25,7 @@ class InputMode(object):
         # keyboard.add_hotkey('ctrl + shift + a', print, args =('you entered', 'hotkey'))
         self.add_keyboard_hotkeys(self.event_listeners)
 
-        keyboard.wait('esc')
+        keyboard.wait("esc")
 
     def add_keyboard_hotkeys(self, event_listeners):
         assert isinstance(event_listeners, dict)
@@ -53,7 +53,7 @@ class ListDirectories(object):
         files = os.listdir(self.path.filename)
         directory = self.path.filename
         directory = directory[1:]
-        directory = Text(directory,style="bold")
+        directory = Text(directory, style="bold")
         table = Table(title=directory)
 
         table.add_column("Name", justify="center", style="cyan", no_wrap=True)
@@ -72,26 +72,30 @@ class ListDirectories(object):
             table.add_row(
                 filename, file_type, extension, f"{size} bytes", modified_time
             )
-        
+
         title = print_title()
         print(title)
         console = Console()
         self.console.print(table)
-        fileno = Text("| File 1 of 1",style="bold blue")
-        user = Text(getpass.getuser().rjust(28, ' '),style="bold blue")
-        helpinstructions = Text("h=Help |".rjust(38, ' '),style="bold blue")
-        console.print(fileno+user+helpinstructions)
+        fileno = Text("| File 1 of 1", style="bold blue")
+        user = Text(getpass.getuser().rjust(28, " "), style="bold blue")
+        helpinstructions = Text("h=Help |".rjust(38, " "), style="bold blue")
+        console.print(fileno + user + helpinstructions)
 
         self.input_mode()
 
     def input_mode(self):
-        input_mode = InputMode({
-            "ctrl + shift + n" : KeyboardEventListeners.create_new_directory,
-            "ctrl + shift + b" : KeyboardEventListeners.create_bookmark,
-            "ctrl + b" : KeyboardEventListeners.show_bookmarks,
-            "ctrl + n" : KeyboardEventListeners.create_new_file,
-            "ctrl + shift + v" : lambda : KeyboardEventListeners.preview_markdown(self.path, self.console)
-        })
+        input_mode = InputMode(
+            {
+                "ctrl + shift + n": KeyboardEventListeners.create_new_directory,
+                "ctrl + shift + b": KeyboardEventListeners.create_bookmark,
+                "ctrl + b": KeyboardEventListeners.show_bookmarks,
+                "ctrl + n": KeyboardEventListeners.create_new_file,
+                "ctrl + shift + v": lambda: KeyboardEventListeners.preview_markdown(
+                    self.path, self.console
+                ),
+            }
+        )
 
     def open_file(self):
         """Show the content of a file in the terminal"""
