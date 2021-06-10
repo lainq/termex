@@ -15,13 +15,13 @@ class Bookmarks(object):
 			with open(self.path, "w") as bookmarks_writer:
 				bookmarks_writer.write(json.dumps([], indent=4))
 
-	def __get_data(self):
+	def get_data(self):
 		self.create_file()
 		with open(self.path, "r") as file_reader:
 			return json.loads(file_reader.read())
 
 	def bookmark(self, folder):
-		data = self.__get_data()
+		data = self.get_data()
 		add_bookmark = None
 		if folder in data:
 			data.remove(folder)

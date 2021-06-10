@@ -8,6 +8,7 @@ from rich.console import Console
 from rich.syntax import Syntax
 from rich.table import Table
 from rich.text import Text
+from rich.panel import Panel
 
 from exception import CommandLineException
 from prompt import InputPrompt
@@ -59,6 +60,21 @@ class KeyboardEventListeners(object):
             rprint(f"[yellow]Added {folder} to bookmarks [/yellow]")
 
     @staticmethod
+    def create_new_file():
+        filename = InputPrompt("Enter filename").create_prompt()
+        if len(filename) == 0:
+            CommandLineException(f"Invalid filename", is_fatal=False)
+            return None
+
+        path = os.path.join(os.getcwd(), filename)
+        if os.path.isfile(path):
+            CommandLineException(f"{path} already exists", is_fatal=False)
+        else:
+            with open(path, "w") as file_writer:
+                file_writer.write("\n")
+            rprint(f"[green]Successfully created {path} [/green]")            
+
+    @staticmethod
     def __find_default_folder_name(folder_name):
         if not folder_name.startswith("Folder"):
             return folder_name
@@ -68,6 +84,12 @@ class KeyboardEventListeners(object):
             return folder_name
 
         return f"{folder_name}{count}"
+
+    @staticmethod
+    def show_bookmarks():
+        bookmarks = "\n".join(Bookmarks().get_data())
+        rprint(Panel(bookmarks, title="Bookmarks", expand=False))
+
 
 class ListDirectories(object):
     def __init__(self, path):
@@ -118,7 +140,9 @@ class ListDirectories(object):
 
         input_mode = InputMode({
             "ctrl + shift + n" : KeyboardEventListeners.create_new_directory,
-            "ctrl + shift + b" : KeyboardEventListeners.create_bookmark
+            "ctrl + shift + b" : KeyboardEventListeners.create_bookmark,
+            "ctrl + b" : KeyboardEventListeners.show_bookmarks,
+            "ctrl + n" : KeyboardEventListeners.create_new_file
         })
 
     def open_file(self):
