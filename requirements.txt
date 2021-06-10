@@ -3,6 +3,7 @@ black==21.5b2
 click==8.0.1
 colorama==0.4.4
 commonmark==0.9.1
+keyboard==0.13.5
 mypy-extensions==0.4.3
 pathspec==0.8.1
 Pygments==2.9.0

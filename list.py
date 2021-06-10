@@ -1,11 +1,36 @@
 import os
 import time
 import getpass
+import keyboard
 
 from rich.console import Console
 from rich.syntax import Syntax
 from rich.table import Table
 from rich.text import Text
+
+from exception import CommandLineException
+
+class InputMode(object):
+    def __init__(self, input_prompt=":", event_listeners={}):
+        self.prompt = input_prompt.strip()
+        self.event_listeners = event_listeners
+
+        self.create_prompt()
+
+    def create_prompt(self):
+        # keyboard.add_hotkey('a', lambda: print("LOL"))
+        # keyboard.add_hotkey('ctrl + shift + a', print, args =('you entered', 'hotkey'))
+        self.add_keyboard_hotkeys(self.event_listeners)
+
+        keyboard.wait('esc')
+
+    def add_keyboard_hotkeys(self, event_listeners):
+        assert isinstance(event_listeners, dict)
+        for event_listeners_key in event_listeners:
+            event_actions = event_listeners[event_listeners_key]
+
+            assert isinstance(eve, str) and isinstance(event_actions, callable)
+            keyboard.add_hotkey(event_listeners_key.strip(), event_actions)
 
 
 
@@ -15,7 +40,10 @@ class ListDirectories(object):
         self.console = Console()
 
         if self.path.is_directory:
-            self.list_directory_content()
+            try:
+                self.list_directory_content()
+            except Exception as exception:
+                CommandLineException(exception.__str__())
         else:
             self.open_file()
 
@@ -50,6 +78,8 @@ class ListDirectories(object):
         user = Text(getpass.getuser().rjust(28, ' '),style="bold blue")
         helpinstructions = Text("h=Help |".rjust(38, ' '),style="bold blue")
         console.print(fileno+user+helpinstructions)
+
+        input_mode = InputMode()
 
     def open_file(self):
         """Show the content of a file in the terminal"""
