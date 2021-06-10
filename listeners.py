@@ -76,3 +76,4 @@ class KeyboardEventListeners(object):
     def show_bookmarks():
         bookmarks = "\n".join(Bookmarks().get_data())
         rprint(Panel(bookmarks, title="Bookmarks", expand=False))
+        
