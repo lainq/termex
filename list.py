@@ -7,6 +7,8 @@ from rich.syntax import Syntax
 from rich.table import Table
 from rich.text import Text
 
+from title import printtitle
+
 
 
 class ListDirectories(object):
@@ -43,7 +45,8 @@ class ListDirectories(object):
                 filename, file_type, extension, f"{size} bytes", modified_time
             )
         
-
+        title = printtitle()
+        print(title)
         console = Console()
         self.console.print(table)
         fileno = Text("| File 1 of 1",style="bold blue")
