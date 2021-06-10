@@ -3,7 +3,6 @@ import time
 import getpass
 import keyboard
 
-from rich import print as rprint
 from rich.console import Console
 from rich.syntax import Syntax
 from rich.table import Table

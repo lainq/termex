@@ -1,5 +1,6 @@
 import os
 
+from rich import print as rprint
 from rich.panel import Panel
 from rich.markdown import Markdown
 
@@ -75,3 +76,4 @@ class KeyboardEventListeners(object):
     def show_bookmarks():
         bookmarks = "\n".join(Bookmarks().get_data())
         rprint(Panel(bookmarks, title="Bookmarks", expand=False))
+        
