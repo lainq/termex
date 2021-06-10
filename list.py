@@ -9,6 +9,7 @@ from rich.syntax import Syntax
 from rich.table import Table
 from rich.text import Text
 from rich.panel import Panel
+from rich.markdown import Markdown
 
 from exception import CommandLineException
 from prompt import InputPrompt
@@ -86,6 +87,18 @@ class KeyboardEventListeners(object):
         return f"{folder_name}{count}"
 
     @staticmethod
+    def preview_markdown(file, console):
+        if file.is_directory:
+            CommandLineException(f"{file.filename}is a directory")
+            return None
+        if not file.filename.endswith(".md"):
+            rprint(f"[yellow]{file.filename} is not a markdown file[/yellow]")
+            return None
+
+        with open(file.filename, "r") as markdown_reader:
+            console.print(Markdown(markdown_reader.read()))
+
+    @staticmethod
     def show_bookmarks():
         bookmarks = "\n".join(Bookmarks().get_data())
         rprint(Panel(bookmarks, title="Bookmarks", expand=False))
@@ -138,17 +151,23 @@ class ListDirectories(object):
         helpinstructions = Text("h=Help |".rjust(38, ' '),style="bold blue")
         console.print(fileno+user+helpinstructions)
 
+        self.input_mode()
+
+    def input_mode(self):
         input_mode = InputMode({
             "ctrl + shift + n" : KeyboardEventListeners.create_new_directory,
             "ctrl + shift + b" : KeyboardEventListeners.create_bookmark,
             "ctrl + b" : KeyboardEventListeners.show_bookmarks,
-            "ctrl + n" : KeyboardEventListeners.create_new_file
+            "ctrl + n" : KeyboardEventListeners.create_new_file,
+            "ctrl + shift + v" : lambda : KeyboardEventListeners.preview_markdown(self.path, self.console)
         })
 
     def open_file(self):
         """Show the content of a file in the terminal"""
+        os.chdir(os.path.dirname(self.path.filename))
         with open(self.path.filename, "rt") as file_reader:
             syntax = Syntax(
                 file_reader.read(), self.path.filename.split(".")[-1], line_numbers=True
             )
             self.console.print(syntax)
+        self.input_mode()
