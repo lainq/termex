@@ -11,6 +11,11 @@ from rich.text import Text
 
 from exception import CommandLineException
 from prompt import InputPrompt
+from title import print_title
+from bookmarks import Bookmarks
+
+BOOKMARKS = Bookmarks()
+BOOKMARKS.add_bookmark_folder("LOL")
 
 class InputMode(object):
     def __init__(self, event_listeners={}):
@@ -97,7 +102,8 @@ class ListDirectories(object):
                 filename, file_type, extension, f"{size} bytes", modified_time
             )
         
-
+        title = print_title()
+        print(title)
         console = Console()
         self.console.print(table)
         fileno = Text("| File 1 of 1",style="bold blue")
