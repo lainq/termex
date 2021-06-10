@@ -9,10 +9,10 @@ from rich.table import Table
 from rich.text import Text
 
 from exception import CommandLineException
+from prompt import InputPrompt
 
 class InputMode(object):
-    def __init__(self, input_prompt=":", event_listeners={}):
-        self.prompt = input_prompt.strip()
+    def __init__(self, event_listeners={}):
         self.event_listeners = event_listeners
 
         self.create_prompt()
@@ -29,10 +29,25 @@ class InputMode(object):
         for event_listeners_key in event_listeners:
             event_actions = event_listeners[event_listeners_key]
 
-            assert isinstance(eve, str) and isinstance(event_actions, callable)
             keyboard.add_hotkey(event_listeners_key.strip(), event_actions)
 
 
+class KeyboardEventListeners(object):
+    @staticmethod
+    def create_new_directory(folder_name="Folder"):
+        name = KeyboardEventListeners.__find_default_folder_name(folder_name)
+        
+
+    @staticmethod
+    def __find_default_folder_name(folder_name):
+        if not folder_name.startswith("Folder"):
+            return folder_name
+
+        count = len(list(filter(lambda filename: filename.startswith("Folder"), os.listdir())))
+        if count == 0:
+            return folder_name
+
+        return f"{folder_name}{count}"
 
 class ListDirectories(object):
     def __init__(self, path):
@@ -40,6 +55,7 @@ class ListDirectories(object):
         self.console = Console()
 
         if self.path.is_directory:
+            os.chdir(self.path.filename)
             try:
                 self.list_directory_content()
             except Exception as exception:
@@ -79,7 +95,9 @@ class ListDirectories(object):
         helpinstructions = Text("h=Help |".rjust(38, ' '),style="bold blue")
         console.print(fileno+user+helpinstructions)
 
-        input_mode = InputMode()
+        input_mode = InputMode({
+            "ctrl + shift + n" : KeyboardEventListeners.create_new_directory
+        })
 
     def open_file(self):
         """Show the content of a file in the terminal"""
