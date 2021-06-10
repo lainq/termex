@@ -9,8 +9,6 @@ from rich.text import Text
 
 from title import printtitle
 
-
-
 class ListDirectories(object):
     def __init__(self, path):
         self.path = path
