@@ -14,9 +14,6 @@ from prompt import InputPrompt
 from title import print_title
 from bookmarks import Bookmarks
 
-BOOKMARKS = Bookmarks()
-BOOKMARKS.add_bookmark_folder("LOL")
-
 class InputMode(object):
     def __init__(self, event_listeners={}):
         self.event_listeners = event_listeners
@@ -52,6 +49,14 @@ class KeyboardEventListeners(object):
             os.mkdir(path)
             rprint(f"[green]Successfully created {path}[/green]")
 
+    @staticmethod
+    def create_bookmark():
+        folder = os.getcwd()
+        bookmark = Bookmarks().bookmark(folder)
+        if not bookmark:
+            rprint(f"[yellow]Removed {folder} from bookmarks [/yellow]")
+        else:
+            rprint(f"[yellow]Added {folder} to bookmarks [/yellow]")
 
     @staticmethod
     def __find_default_folder_name(folder_name):
@@ -112,7 +117,8 @@ class ListDirectories(object):
         console.print(fileno+user+helpinstructions)
 
         input_mode = InputMode({
-            "ctrl + shift + n" : KeyboardEventListeners.create_new_directory
+            "ctrl + shift + n" : KeyboardEventListeners.create_new_directory,
+            "ctrl + shift + b" : KeyboardEventListeners.create_bookmark
         })
 
     def open_file(self):

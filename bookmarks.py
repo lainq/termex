@@ -22,11 +22,14 @@ class Bookmarks(object):
 
 	def bookmark(self, folder):
 		data = self.__get_data()
+		add_bookmark = None
 		if folder in data:
 			data.remove(folder)
 		else:
 			data.append(folder)
+			add_bookmark = True
 		self.__write_json_data(data)
+		return add_bookmark
 
 	def __write_json_data(self, data):
 		self.create_file()
