@@ -9,7 +9,6 @@ class InputPrompt(object):
 		self.message = message
 		self.character = character or self.default_query_character
 
-		self.create_input_prompt()
 
 	def create_prompt(self):
 		print(f"[cyan]{self.message} {self.character}[/cyan]", end="")

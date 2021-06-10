@@ -3,6 +3,7 @@ import time
 import getpass
 import keyboard
 
+from rich import print as rprint
 from rich.console import Console
 from rich.syntax import Syntax
 from rich.table import Table
@@ -35,8 +36,17 @@ class InputMode(object):
 class KeyboardEventListeners(object):
     @staticmethod
     def create_new_directory(folder_name="Folder"):
-        name = KeyboardEventListeners.__find_default_folder_name(folder_name)
-        
+        directory = InputPrompt("Enter folder name (Folder)").create_prompt()
+        directory = folder_name if len(directory) == 0 else directory
+        name = KeyboardEventListeners.__find_default_folder_name(directory)
+
+        path = os.path.join(os.getcwd(), name)
+        if os.path.isdir(path):
+            CommandLineException(f"{name} already exists", is_fatal=False)
+        else:
+            os.mkdir(path)
+            rprint(f"[green]Successfully created {path}[/green]")
+
 
     @staticmethod
     def __find_default_folder_name(folder_name):
