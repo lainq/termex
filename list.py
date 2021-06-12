@@ -9,7 +9,7 @@ from rich.table import Table
 from rich.text import Text
 
 from exception import CommandLineException
-from title import print_title
+from utils import print_title
 from listeners import KeyboardEventListeners
 
 
@@ -37,7 +37,9 @@ class InputMode(object):
 class ListDirectories(object):
     def __init__(self, path):
         self.path = path
+        self.files = os.listdir(self.path.filename)
         self.console = Console()
+        self.current_filename_index = 0
 
         if self.path.is_directory:
             os.chdir(self.path.filename)
@@ -49,7 +51,7 @@ class ListDirectories(object):
             self.open_file()
 
     def list_directory_content(self):
-        files = os.listdir(self.path.filename)
+
         directory = self.path.filename
         directory = directory[1:]
         directory = Text(directory, style="bold")
@@ -61,7 +63,7 @@ class ListDirectories(object):
         table.add_column("Size", justify="center", style="yellow")
         table.add_column("Modified at", justify="center", style="green")
 
-        for filename in files:
+        for filename in self.files:
             path = os.path.join(self.path.filename, filename)
             file_type = "dir" if os.path.isdir(path) else "file"
             extension = "N/A" if os.path.isdir(path) else filename.split(".")[-1]
@@ -76,10 +78,9 @@ class ListDirectories(object):
         print(title)
         console = Console()
         self.console.print(table)
-        fileno = Text("| File 1 of 1", style="bold blue")
-        user = Text(getpass.getuser().rjust(28, " "), style="bold blue")
-        helpinstructions = Text("h=Help |".rjust(38, " "), style="bold blue")
-        console.print(fileno + user + helpinstructions)
+
+        user = Text(getpass.getuser(), style="bold blue")
+        console.print(user)
 
         self.input_mode()
 
@@ -92,9 +93,18 @@ class ListDirectories(object):
                 "ctrl + n": KeyboardEventListeners.create_new_file,
                 "ctrl + shift + v": lambda: KeyboardEventListeners.preview_markdown(
                     self.path, self.console
-                ),
+                ),        
+                "down arrow" : lambda: self.switch_file(1),
+                "up arrow" : lambda: self.switch_file(-1)
             }
         )
+
+    def switch_file(self, increment_by):
+        self.current_filename_index += increment_by
+        if self.current_filename_index >= len(self.files) or self.current_filename_index < 0:
+            self.current_filename_index -= increment_by
+            return None
+        print(Text(f"Selected {self.files[self.current_filename_index]}", style="yellow"))
 
     def open_file(self):
         """Show the content of a file in the terminal"""
