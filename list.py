@@ -7,6 +7,7 @@ from rich.console import Console
 from rich.syntax import Syntax
 from rich.table import Table
 from rich.text import Text
+from rich.prompt import Prompt
 
 from exception import CommandLineException
 from utils import print_title
@@ -41,6 +42,7 @@ class ListDirectories(object):
         self.console = Console()
         self.current_filename_index = 0
 
+    def create(self):
         if self.path.is_directory:
             os.chdir(self.path.filename)
             try:
@@ -95,9 +97,14 @@ class ListDirectories(object):
                     self.path, self.console
                 ),        
                 "down arrow" : lambda: self.switch_file(1),
-                "up arrow" : lambda: self.switch_file(-1)
+                "up arrow" : lambda: self.switch_file(-1),
+                ":" : self.command_input
             }
         )
+
+    def command_input(self):
+        inp = Prompt.ask("")
+        print(inp)
 
     def switch_file(self, increment_by):
         self.current_filename_index += increment_by
@@ -105,7 +112,7 @@ class ListDirectories(object):
             self.current_filename_index -= increment_by
             return None
         print(Text(f"Selected {self.files[self.current_filename_index]}", style="yellow"))
-
+    
     def open_file(self):
         """Show the content of a file in the terminal"""
         os.chdir(os.path.dirname(self.path.filename))

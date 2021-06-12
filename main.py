@@ -37,7 +37,7 @@ def main():
     file_object = File(filename)
     if not file_object.exists:
         CommandLineException(f"{filename} does not exist")
-    _ = ListDirectories(file_object)
+    _ = ListDirectories(file_object).create()
 
 
 if __name__ == "__main__":
