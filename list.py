@@ -95,10 +95,10 @@ class ListDirectories(object):
                 "ctrl + n": KeyboardEventListeners.create_new_file,
                 "ctrl + shift + v": lambda: KeyboardEventListeners.preview_markdown(
                     self.path, self.console
-                ),        
-                "down arrow" : lambda: self.switch_file(1),
-                "up arrow" : lambda: self.switch_file(-1),
-                ":" : self.command_input
+                ),
+                "down arrow": lambda: self.switch_file(1),
+                "up arrow": lambda: self.switch_file(-1),
+                ":": self.command_input,
             }
         )
 
@@ -108,11 +108,16 @@ class ListDirectories(object):
 
     def switch_file(self, increment_by):
         self.current_filename_index += increment_by
-        if self.current_filename_index >= len(self.files) or self.current_filename_index < 0:
+        if (
+            self.current_filename_index >= len(self.files)
+            or self.current_filename_index < 0
+        ):
             self.current_filename_index -= increment_by
             return None
-        print(Text(f"Selected {self.files[self.current_filename_index]}", style="yellow"))
-    
+        print(
+            Text(f"Selected {self.files[self.current_filename_index]}", style="yellow")
+        )
+
     def open_file(self):
         """Show the content of a file in the terminal"""
         os.chdir(os.path.dirname(self.path.filename))
