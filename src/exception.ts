@@ -1,12 +1,17 @@
 import { redBright, yellowBright } from "chalk"
 
+interface ErrorMessage {
+    message: string
+    suggestion? : string
+}
+
 export class CommandLineException {
     private readonly message:string
     private readonly suggestion?:string
 
-    constructor(message:string, suggestion?:string, isFatal:boolean = true, exitStatusCode:number = 1){
-        this.message = message
-        this.suggestion = suggestion
+    constructor(message:ErrorMessage, isFatal:boolean = true, exitStatusCode:number = 1){
+        this.message = message.message
+        this.suggestion = message.suggestion
         this.throw(isFatal, exitStatusCode)
     }
 
