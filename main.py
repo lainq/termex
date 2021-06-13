@@ -3,23 +3,7 @@ import os
 
 from exception import CommandLineException
 from list import ListDirectories
-
-
-class File(object):
-    def __init__(self, filename):
-        self.filename = filename
-
-    @property
-    def exists(self):
-        return os.path.exists(self.filename)
-
-    @property
-    def is_directory(self):
-        return os.path.isdir(self.filename)
-
-    @property
-    def size(self):
-        return os.stat(self.filename).st_size
+from utils import File
 
 
 def main():

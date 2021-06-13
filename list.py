@@ -12,6 +12,7 @@ from rich.prompt import Prompt
 from exception import CommandLineException
 from utils import print_title
 from listeners import KeyboardEventListeners
+from utils import File
 
 
 class InputMode(object):
@@ -36,11 +37,12 @@ class InputMode(object):
 
 
 class ListDirectories(object):
-    def __init__(self, path):
+    def __init__(self, path, show_title=True):
         self.path = path
         self.files = os.listdir(self.path.filename)
         self.console = Console()
         self.current_filename_index = 0
+        self.show_title = show_title
 
     def create(self):
         if self.path.is_directory:
@@ -76,8 +78,8 @@ class ListDirectories(object):
                 filename, file_type, extension, f"{size} bytes", modified_time
             )
 
-        title = print_title()
-        print(title)
+        if self.show_title:
+            print(print_title())
         console = Console()
         self.console.print(table)
 
@@ -99,8 +101,13 @@ class ListDirectories(object):
                 "down arrow": lambda: self.switch_file(1),
                 "up arrow": lambda: self.switch_file(-1),
                 ":": self.command_input,
+                "return" : self.enter_file
             }
         )
+
+    def enter_file(self):
+        filename = os.path.join(self.path.filename, self.files[self.current_filename_index])
+        ListDirectories(File(filename), show_title=False).create()
 
     def command_input(self):
         inp = Prompt.ask("")
