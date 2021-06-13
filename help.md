@@ -25,5 +25,3 @@
   - Ctrl+, = settings
   - q = quit exploterm
 
-<h2>Contact</h2>
-Contact us at <a href="mailto:cexploterm@gmail.com">cexploterm@gmail.com</a> or check us out on github <a href="https://github.com/exploterm">here</a>.

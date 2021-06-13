@@ -37,12 +37,19 @@ class InputMode(object):
 
 
 class ListDirectories(object):
-    def __init__(self, path, show_title=True):
+    def __init__(self, path, show_title=True, parameters=[]):
         self.path = path
-        self.files = os.listdir(self.path.filename)
+        self.parameters = parameters
+        self.files = list(filter(self.filter_files, os.listdir(self.path.filename))) if self.path.is_directory else []
         self.console = Console()
         self.current_filename_index = 0
         self.show_title = show_title
+
+    def filter_files(self, filename):
+        only_dirs = "only-dirs" in self.parameters
+        if only_dirs:
+            return os.path.isdir(os.path.join(self.path.filename, filename))
+        return True
 
     def create(self):
         if self.path.is_directory:

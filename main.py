@@ -4,24 +4,26 @@ import os
 from exception import CommandLineException
 from list import ListDirectories
 from utils import File
+from arguments import ArgumentParser
 
 
 def main():
-    arguments = sys.argv[1:]
+    parser = ArgumentParser().parse()
     filename = None
-    if len(arguments) == 0:
+    if not parser.command:
         filename = os.getcwd()
     else:
-        filename = arguments[0]
-        if filename == ".":
+        if parser.command == ".":
             filename = os.getcwd()
-        elif filename == "..":
+        elif parser.command == "..":
             filename = os.path.dirname(os.getcwd())
-
+        else:
+            filename = parser.command
+    
     file_object = File(filename)
     if not file_object.exists:
         CommandLineException(f"{filename} does not exist")
-    _ = ListDirectories(file_object).create()
+    _ = ListDirectories(file_object, parameters=parser.parameters).create()
 
 
 if __name__ == "__main__":
