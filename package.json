@@ -1,0 +1,26 @@
+{
+  "name": "termex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exploterm/terminal-file-explorer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/exploterm/terminal-file-explorer/issues"
+  },
+  "homepage": "https://github.com/exploterm/terminal-file-explorer#readme",
+  "dependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/node": "^15.12.2",
+    "chalk": "^4.1.1",
+    "table": "^6.7.1"
+  }
+}
