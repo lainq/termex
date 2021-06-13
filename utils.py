@@ -3,6 +3,7 @@ import os
 from rich import print
 from pyfiglet import Figlet
 
+
 class File(object):
     def __init__(self, filename):
         self.filename = filename

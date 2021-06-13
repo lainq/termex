@@ -19,7 +19,7 @@ def main():
             filename = os.path.dirname(os.getcwd())
         else:
             filename = parser.command
-    
+
     file_object = File(filename)
     if not file_object.exists:
         CommandLineException(f"{filename} does not exist")

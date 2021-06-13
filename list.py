@@ -40,7 +40,11 @@ class ListDirectories(object):
     def __init__(self, path, show_title=True, parameters=[]):
         self.path = path
         self.parameters = parameters
-        self.files = list(filter(self.filter_files, os.listdir(self.path.filename))) if self.path.is_directory else []
+        self.files = (
+            list(filter(self.filter_files, os.listdir(self.path.filename)))
+            if self.path.is_directory
+            else []
+        )
         self.console = Console()
         self.current_filename_index = 0
         self.show_title = show_title
@@ -108,12 +112,14 @@ class ListDirectories(object):
                 "down arrow": lambda: self.switch_file(1),
                 "up arrow": lambda: self.switch_file(-1),
                 ":": self.command_input,
-                "return" : self.enter_file
+                "return": self.enter_file,
             }
         )
 
     def enter_file(self):
-        filename = os.path.join(self.path.filename, self.files[self.current_filename_index])
+        filename = os.path.join(
+            self.path.filename, self.files[self.current_filename_index]
+        )
         ListDirectories(File(filename), show_title=False).create()
 
     def command_input(self):
