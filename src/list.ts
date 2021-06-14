@@ -1,6 +1,9 @@
-import { readdirSync } from "fs"
+import { readdirSync, readFile } from "fs"
 import { join } from "path"
 import { checkFileExists, File } from "./utils"
+import { chdir } from 'process'
+import { CommandLineException } from './exception'
+import { highlight } from 'cli-highlight'
 
 export class ListFiles {
     private path:File
@@ -22,6 +25,30 @@ export class ListFiles {
             return true
         }) : undefined
 
-        console.log(this.files)
+        this.create()
+    }
+
+    private create = ():any => {
+        if(this.path.isDirectory) {
+            try { chdir(this.path.path) }
+            catch(excpetion:any) { new CommandLineException({
+                message : excpetion.msg
+            })}
+            console.log("listing dirs")
+        } else {
+            this.openFile()
+        }
+    }
+
+    private openFile = () => {
+        readFile(this.path.path, (err:NodeJS.ErrnoException | null, data:Buffer) => {
+            if(err){
+                new CommandLineException({
+                    message : err.message
+                })
+            }
+            const dataToString:string = data.toString()
+            console.log(highlight(dataToString))
+        })
     }
 }
