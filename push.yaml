@@ -7,12 +7,9 @@ steps:
     in:
       cmd: black .
   - name: pypyr.steps.cmd
-    run: '{message}'
+    run: "{message}"
     in:
       cmd: git add . & git commit -m "{message}"
   - name: pypyr.steps.cmd
     in:
       cmd: git push -u origin main
-      
-
-  

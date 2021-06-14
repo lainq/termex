@@ -21,6 +21,7 @@
     "@types/chalk": "^2.2.0",
     "@types/node": "^15.12.2",
     "chalk": "^4.1.1",
+    "cli-highlight": "^2.1.11",
     "table": "^6.7.1"
   }
 }

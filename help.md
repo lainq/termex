@@ -4,16 +4,18 @@
 <h2>Usage</h2>
 <h4>Shortcuts & Functionalities:</h4>
 
-+ Movement:
+- Movement:
+
   - up arrow
   - down arrow
 
-+ Change directory:
+- Change directory:
+
   - left arrow = parent directory
   - right arrow/enter = open file/open directory
-  - Ctrl+b = add to bookmarks 
+  - Ctrl+b = add to bookmarks
 
-+ Functions:
+- Functions:
   - Ctrl+r = refresh window
   - s = sort files
   - / = find in directory
@@ -24,4 +26,3 @@
   - Ctrl+e = run python script
   - Ctrl+, = settings
   - q = quit exploterm
-

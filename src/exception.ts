@@ -1,4 +1,4 @@
-import {redBright, yellowBright} from 'chalk';
+import { redBright, yellowBright } from "chalk";
 
 interface ErrorMessage {
   // The error message

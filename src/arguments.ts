@@ -1,5 +1,5 @@
-import {argv} from 'process';
-import {CommandLineException} from './exception';
+import { argv } from "process";
+import { CommandLineException } from "./exception";
 
 export interface ArgumentParserResults {
   // The command that the user wants to run
@@ -39,15 +39,15 @@ export class ArgumentParser {
         command = currentArgument;
         continue;
       }
-      const isValidArgument: boolean = currentArgument.startsWith('--');
+      const isValidArgument: boolean = currentArgument.startsWith("--");
       if (!isValidArgument) {
         const error = new CommandLineException({
           message: `${currentArgument} is not a valid argument`,
-          suggestion: 'Parameter keys should start with --',
+          suggestion: "Parameter keys should start with --",
         });
       }
       parameters.push(currentArgument.slice(2));
     }
-    return {command: command, parameters: parameters};
+    return { command: command, parameters: parameters };
   }
 }
