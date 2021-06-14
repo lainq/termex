@@ -1,9 +1,11 @@
-import { readdirSync, readFile } from "fs"
+import { readdirSync, readFile, statSync } from "fs"
 import { join } from "path"
 import { checkFileExists, File } from "./utils"
 import { chdir } from 'process'
 import { CommandLineException } from './exception'
 import { highlight } from 'cli-highlight'
+import { cyan, magenta, yellow, green } from 'chalk'
+import { table } from 'table'
 
 export class ListFiles {
     private path:File
@@ -34,10 +36,32 @@ export class ListFiles {
             catch(excpetion:any) { new CommandLineException({
                 message : excpetion.msg
             })}
-            console.log("listing dirs")
+            this.directories()
         } else {
             this.openFile()
         }
+    }
+
+    private directories = () => {
+        let tableData:Array<Array<string>> = [[
+            cyan("Name"), magenta("Type"), green("Extension"), yellow("Size"), green("Modified at")
+        ]]
+        if(!this.files){
+            return null
+        }
+        for(let fileIndex=0; fileIndex<this.files.length; fileIndex++){
+            const currentFileName:string = this.files[fileIndex]
+            const fileStats:any = statSync(join(this.path.path, currentFileName))
+            const fileType:string = checkFileExists(join(this.path.path, currentFileName), true) ? "dir" : "file"
+            const extension:string = fileType == "dir" ? "N/A" : currentFileName.split(".").slice(-1)[0]
+            const size:number = fileStats.size
+            const modifiedTime:Date = fileStats.mtime
+
+            tableData.push([
+                cyan(currentFileName), magenta(fileType), green(extension), yellow(`${size} bytes`), green(modifiedTime.toString().split(" ").slice(0, 4).join(" "))
+            ])
+        }
+        console.log(table(tableData))
     }
 
     private openFile = () => {
