@@ -46,7 +46,7 @@ export class ArgumentParser {
           suggestion: 'Parameter keys should start with --',
         });
       }
-      parameters.push(currentArgument);
+      parameters.push(currentArgument.slice(2));
     }
     return {command: command, parameters: parameters};
   }
