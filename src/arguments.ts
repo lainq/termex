@@ -7,7 +7,7 @@ export interface ArgumentParserResults {
   // if the length of the arguments is 0
   // The details about the current working directory
   // is displayed
-  command: string;
+  command: string | null;
   // The flags passed in along with the command
   // Eg := --only-dirs, --gitignore
   // Flags should start with double hiphens(--)
@@ -28,7 +28,7 @@ export class ArgumentParser {
    * @returns {ArgumentParserResults} The command and the flags
    */
   public parseArguments(): ArgumentParserResults {
-    let command: string = 'help';
+    let command: string | null = null;
     let parameters: Array<string> = new Array<string>();
     for (let index = 0; index < this.arguments.length; index++) {
       const currentArgument: string = this.arguments[index];
