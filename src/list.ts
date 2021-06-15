@@ -88,9 +88,16 @@ export class ListFiles {
       ]);
     }
     console.log(table(tableData));
-    const inputMode = new InputMode(new Map<string, Function>([
-      ['ctrl + v', () => {console.log("LOL")}],
-    ]))
+    const inputMode = new InputMode(
+      new Map<string, Function>([
+        [
+          "ctrl + v",
+          () => {
+            console.log("LOL");
+          },
+        ],
+      ])
+    );
   };
 
   private openFile = () => {
