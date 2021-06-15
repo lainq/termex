@@ -6,6 +6,7 @@ import { CommandLineException } from "./exception";
 import { highlight } from "cli-highlight";
 import { cyan, magenta, yellow, green } from "chalk";
 import { table } from "table";
+import { InputMode } from "./input";
 
 export class ListFiles {
   private path: File;
@@ -87,6 +88,7 @@ export class ListFiles {
       ]);
     }
     console.log(table(tableData));
+    const inputMode = new InputMode()
   };
 
   private openFile = () => {
