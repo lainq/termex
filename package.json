@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/exploterm/terminal-file-explorer#readme",
   "dependencies": {
+    "@discordjs/collection": "^0.1.6",
     "@types/chalk": "^2.2.0",
     "@types/node": "^15.12.2",
     "chalk": "^4.1.1",

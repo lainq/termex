@@ -89,8 +89,7 @@ export class ListFiles {
     }
     console.log(table(tableData));
     const inputMode = new InputMode(new Map<string, Function>([
-      ['ctrl + shift + v', () => {}],
-      ['q', () => {process.exit()}]
+      ['ctrl + v', () => {console.log("LOL")}],
     ]))
   };
 
