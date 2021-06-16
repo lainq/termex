@@ -2,11 +2,15 @@ import { stdin, stdout } from "process";
 import { createInterface, Interface } from "readline";
 
 interface PromptOptions {
+    // The prompt message
     prompt:string
+    // The query character
     character:string
+    // The callback function to be executed
+    // after recieving input
     callback?:Function
+    // Any options
     options?:Array<string>
-    repeat?:boolean
 }
 
 export class Prompt {
@@ -15,6 +19,8 @@ export class Prompt {
     private callback?:Function
     private options?:Array<string>
 
+    // The readline interface used to read data
+    // from the command line
     private readlineInterface:Interface = createInterface({
         input : stdin,
         output : stdout
