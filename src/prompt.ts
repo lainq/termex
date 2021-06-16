@@ -34,7 +34,6 @@ export class Prompt {
             if(this.callback){
                 this.callback(answer)
             }
-            this.readlineInterface.close()
         })
     }
 

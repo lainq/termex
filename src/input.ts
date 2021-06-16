@@ -51,7 +51,6 @@ export class InputMode {
 
   private addEventListeners = (parsedEvents: Map<Events, Function>) => {
     stdin.on("keypress", (chunk, event: Events): void | null => {
-      console.log(event)
       if (event.name == "q" || event.name == "escape") {
         process.exit();
       }

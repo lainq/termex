@@ -7,6 +7,7 @@ import { highlight } from "cli-highlight";
 import { cyan, magenta, yellow, green, yellowBright } from "chalk";
 import { table } from "table";
 import { InputMode } from "./input";
+import { KeyboardEvents } from "./listeners";
 
 export class ListFiles {
   private path: File;
@@ -106,7 +107,7 @@ export class ListFiles {
     this.createInputMode()
   };
 
-  private createInputMode = ():void => {
+  public createInputMode = ():void => {
     const inputMode = new InputMode(
       new Map<string, Function>([
         [
@@ -120,6 +121,10 @@ export class ListFiles {
           () => {
             this.incrementCurrentFileIndex(-1)
           }
+        ],
+        [
+          "shift+n",
+          KeyboardEvents.createNewDirectory
         ]
       ])
     );
