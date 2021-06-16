@@ -38,20 +38,25 @@ export class ListFiles {
     this.create();
   }
 
-  private incrementCurrentFileIndex = (incrementBy:number=1):void | null => {
-    if(!this.files){
-      return null
+  private incrementCurrentFileIndex = (
+    incrementBy: number = 1
+  ): void | null => {
+    if (!this.files) {
+      return null;
     }
-    const indexCountLimit:number = this.files.length
-    this.currentFileIndex += incrementBy
-    if(this.currentFileIndex >= indexCountLimit || this.currentFileIndex==0) {
-      this.currentFileIndex -= incrementBy
-      return null
+    const indexCountLimit: number = this.files.length;
+    this.currentFileIndex += incrementBy;
+    if (
+      this.currentFileIndex >= indexCountLimit ||
+      this.currentFileIndex == 0
+    ) {
+      this.currentFileIndex -= incrementBy;
+      return null;
     }
 
-    const currentFilename:string = this.files[this.currentFileIndex]
-    console.log(yellowBright(`Selected ${currentFilename}`))
-  }
+    const currentFilename: string = this.files[this.currentFileIndex];
+    console.log(yellowBright(`Selected ${currentFilename}`));
+  };
 
   private create = (): any => {
     if (this.path.isDirectory) {
@@ -104,31 +109,28 @@ export class ListFiles {
       ]);
     }
     console.log(table(tableData));
-    this.createInputMode()
+    this.createInputMode();
   };
 
-  public createInputMode = ():void => {
+  public createInputMode = (): void => {
     const inputMode = new InputMode(
       new Map<string, Function>([
         [
           "down",
           () => {
-            this.incrementCurrentFileIndex(1)
+            this.incrementCurrentFileIndex(1);
           },
         ],
         [
-          "up", 
+          "up",
           () => {
-            this.incrementCurrentFileIndex(-1)
-          }
+            this.incrementCurrentFileIndex(-1);
+          },
         ],
-        [
-          "shift+n",
-          KeyboardEvents.createNewDirectory
-        ]
+        ["shift+n", KeyboardEvents.createNewDirectory],
       ])
     );
-  }
+  };
 
   private openFile = () => {
     readFile(
