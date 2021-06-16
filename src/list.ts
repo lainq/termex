@@ -4,7 +4,7 @@ import { checkFileExists, File } from "./utils";
 import { chdir } from "process";
 import { CommandLineException } from "./exception";
 import { highlight } from "cli-highlight";
-import { cyan, magenta, yellow, green } from "chalk";
+import { cyan, magenta, yellow, green, yellowBright } from "chalk";
 import { table } from "table";
 import { InputMode } from "./input";
 
@@ -35,6 +35,21 @@ export class ListFiles {
       : undefined;
 
     this.create();
+  }
+
+  private incrementCurrentFileIndex = (incrementBy:number=1):void | null => {
+    if(!this.files){
+      return null
+    }
+    const indexCountLimit:number = this.files.length
+    this.currentFileIndex += incrementBy
+    if(this.currentFileIndex >= indexCountLimit || this.currentFileIndex==0) {
+      this.currentFileIndex -= incrementBy
+      return null
+    }
+
+    const currentFilename:string = this.files[this.currentFileIndex]
+    console.log(yellowBright(`Selected ${currentFilename}`))
   }
 
   private create = (): any => {
@@ -88,17 +103,27 @@ export class ListFiles {
       ]);
     }
     console.log(table(tableData));
+    this.createInputMode()
+  };
+
+  private createInputMode = ():void => {
     const inputMode = new InputMode(
       new Map<string, Function>([
         [
-          "ctrl + v",
+          "down",
           () => {
-            console.log("LOL");
+            this.incrementCurrentFileIndex(1)
           },
         ],
+        [
+          "up", 
+          () => {
+            this.incrementCurrentFileIndex(-1)
+          }
+        ]
       ])
     );
-  };
+  }
 
   private openFile = () => {
     readFile(
