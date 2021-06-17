@@ -90,36 +90,44 @@ export class KeyboardEvents {
   /**
    * @public
    * @static
-   * 
+   *
    * Preview markdown files
-   * 
+   *
    * @param {string} filename The file to preview
-   * @returns 
+   * @returns
    */
-  public static previewMarkdown = (filename:string):any => {
-    marked.setOptions({renderer:new TerminalRenderer()})
-    if(!checkFileExists(filename, false)){
-      if(!statSync(filename).isFile()){
-        new CommandLineException({message:"This is not a markdown file"}, false)
-        return null
+  public static previewMarkdown = (filename: string): any => {
+    marked.setOptions({ renderer: new TerminalRenderer() });
+    if (!checkFileExists(filename, false)) {
+      if (!statSync(filename).isFile()) {
+        new CommandLineException(
+          { message: "This is not a markdown file" },
+          false
+        );
+        return null;
       }
     }
 
-    if(!filename.endsWith(".md")){
-      console.log(yellowBright("Markdown files should have a .md extension"))
-      return null
+    if (!filename.endsWith(".md")) {
+      console.log(yellowBright("Markdown files should have a .md extension"));
+      return null;
     }
 
-    readFile(filename, (err:NodeJS.ErrnoException | null, data:Buffer):any => {
-      if(err){
-        new CommandLineException({message:err.message}, false)
-        return null
+    readFile(
+      filename,
+      (err: NodeJS.ErrnoException | null, data: Buffer): any => {
+        if (err) {
+          new CommandLineException({ message: err.message }, false);
+          return null;
+        }
+        console.log(
+          boxen(marked(data.toString()), {
+            padding: 1,
+            margin: 1,
+            borderStyle: "double",
+          })
+        );
       }
-      console.log(boxen(marked(data.toString()), {
-        padding: 1, 
-        margin: 1, 
-        borderStyle: 'double',
-    }))
-    })
-  }
+    );
+  };
 }
