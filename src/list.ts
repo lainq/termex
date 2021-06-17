@@ -1,13 +1,14 @@
 import { readdirSync, readFile, statSync } from "fs";
 import { join } from "path";
 import { checkFileExists, File } from "./utils";
-import { chdir } from "process";
+import { chdir, cwd } from "process";
 import { CommandLineException } from "./exception";
 import { highlight } from "cli-highlight";
 import { cyan, magenta, yellow, green, yellowBright } from "chalk";
 import { table } from "table";
 import { InputMode } from "./input";
 import { KeyboardEvents } from "./listeners";
+import { Bookmarks } from "./bookmarks";
 
 export class ListFiles {
   private path: File;
@@ -16,6 +17,7 @@ export class ListFiles {
   private showTitle: boolean;
 
   private currentFileIndex: number = 0;
+  private bookmarks:Bookmarks = new Bookmarks()
 
   constructor(
     path: File,
@@ -128,6 +130,7 @@ export class ListFiles {
           },
         ],
         ["shift+n", KeyboardEvents.createNewDirectory],
+        ["ctrl+b", () => {Bookmarks.add(cwd(), new Date(), this.bookmarks)}]
       ])
     );
   };
