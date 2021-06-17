@@ -2,6 +2,8 @@ import { mkdir, readFileSync, writeFile, writeFileSync } from "fs";
 import { join } from "path";
 import { checkFileExists } from './utils'
 import { CommandLineException } from './exception'
+import { cyanBright, yellow, yellowBright } from "chalk";
+import boxen from "boxen";
 
 export class Bookmarks {
     private static readonly dirname:string = join(__dirname, "bookmarks")
@@ -9,6 +11,32 @@ export class Bookmarks {
 
     constructor() { this.createBookmarkFiles() }
 
+    public static displayBookmarks = (bookmarks:Bookmarks):void | null => {
+        const data = Array.from(bookmarks.readBookmarksFile())
+        if(data.length == 0){
+            console.log(yellow("No Bookmarks yet!"))
+            return null
+        }
+        const box:string = boxen(data.join('\n'), {
+            padding: 1, 
+            margin: 1, 
+            borderStyle: 'double',
+        })
+        console.log(cyanBright(box))
+    }
+
+    /**
+     * @public
+     * @static
+     * 
+     * Adds the path to bookmark if it is not present in the bookmarks, 
+     * if it is present, remove it from the bookmarks. And dispay
+     * a message based on the action performed
+     * 
+     * @param {string} path The path to add to the bookmark
+     * @param {Date} time The time at which the bookmark was added
+     * @param {Bookmarks} bookmarks The bookmarks object with the properties read and write
+     */
     public static add = (path:string, time:Date, bookmarks:Bookmarks):void => {
         let paths:any = Array.from(bookmarks.readBookmarksFile())
         let removed:boolean = false
@@ -20,6 +48,11 @@ export class Bookmarks {
             paths.push(path)
         }
         bookmarks.writeFile(JSON.stringify(paths))
+        if(removed) {
+            console.log(yellowBright(`Successfully removed ${path} from the bookmark`))
+        } else {
+            console.log(yellowBright(`Successfully added ${path} to the bookmark`))
+        }
     }
 
     private createBookmarkFiles = ():void => {
