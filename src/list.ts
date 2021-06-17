@@ -131,7 +131,8 @@ export class ListFiles {
         ],
         ["shift+n", KeyboardEvents.createNewDirectory],
         ["ctrl+b", () => {Bookmarks.add(cwd(), new Date(), this.bookmarks)}],
-        ["shift+b", () => {Bookmarks.displayBookmarks(this.bookmarks)}]
+        ["shift+b", () => {Bookmarks.displayBookmarks(this.bookmarks)}],
+        ["shift+p", () => {KeyboardEvents.previewMarkdown(this.path.path)}]
       ])
     );
   };
@@ -149,5 +150,6 @@ export class ListFiles {
         console.log(highlight(dataToString));
       }
     );
+    this.createInputMode()
   };
 }

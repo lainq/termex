@@ -18,12 +18,17 @@
   },
   "homepage": "https://github.com/exploterm/terminal-file-explorer#readme",
   "dependencies": {
-    "@discordjs/collection": "^0.1.6",
     "@types/chalk": "^2.2.0",
     "@types/node": "^15.12.2",
     "boxen": "^5.0.1",
     "chalk": "^4.1.1",
     "cli-highlight": "^2.1.11",
+    "marked": "^2.1.1",
+    "marked-terminal": "^4.1.1",
     "table": "^6.7.1"
+  },
+  "devDependencies": {
+    "@types/marked": "^2.0.3",
+    "@types/marked-terminal": "^3.1.1"
   }
 }

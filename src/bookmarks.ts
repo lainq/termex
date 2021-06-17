@@ -9,10 +9,29 @@ export class Bookmarks {
     private static readonly dirname:string = join(__dirname, "bookmarks")
     private static readonly path:string = join(Bookmarks.dirname, "bookmarks.json")
 
+    /**
+     * @constructor
+     * 
+     * The constructor for the bookmarks class
+     * The function initializes the bookmarks
+     */
     constructor() { this.createBookmarkFiles() }
 
+    /**
+     * @public
+     * @static
+     * 
+     * Display all the bookmarks if any, else
+     * thow a nothing exists message
+     * 
+     * @param {Bookmarks} bookmarks The bookmarks object
+     * @returns 
+     */
     public static displayBookmarks = (bookmarks:Bookmarks):void | null => {
         const data = Array.from(bookmarks.readBookmarksFile())
+
+        // Check whether the use has saved something
+        // in the bookmarks.
         if(data.length == 0){
             console.log(yellow("No Bookmarks yet!"))
             return null
@@ -55,6 +74,12 @@ export class Bookmarks {
         }
     }
 
+    /**
+     * @private
+     * 
+     * Check if the directory and the bookmarks file
+     * exists and create the files if they do not exist
+     */
     private createBookmarkFiles = ():void => {
         if(!checkFileExists(Bookmarks.dirname, true)){
             mkdir(Bookmarks.dirname, (err:NodeJS.ErrnoException | null):void | null=> {
@@ -73,6 +98,14 @@ export class Bookmarks {
         }
     }
 
+    /**
+     * @private
+     * 
+     * Read the bookmarks file and return the content
+     * is the file as an array of bookmarks
+     * 
+     * @returns {any} The bookmarks
+     */
     private readBookmarksFile = ():any => {
         this.createBookmarkFiles()
         const fileContent:string = readFileSync(Bookmarks.path).toString()
@@ -84,6 +117,14 @@ export class Bookmarks {
         }
     }
 
+    /**
+     * @private
+     * 
+     * Write some data to the bookmarks file. This is used
+     * when the json contains an error and should be reset.
+     * 
+     * @param {string} content The content to write to the file
+     */
     private writeFile = (content:string):void | null => {
         this.createBookmarkFiles()
         writeFile(Bookmarks.path, content, (err:NodeJS.ErrnoException | null):void => {
