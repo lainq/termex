@@ -4,7 +4,16 @@ import { checkFileExists, clearPreviousLine, File } from "./utils";
 import { chdir, cwd } from "process";
 import { CommandLineException } from "./exception";
 import { highlight } from "cli-highlight";
-import { cyan, magenta, yellow, green, yellowBright, cyanBright, magentaBright, greenBright } from "chalk";
+import {
+  cyan,
+  magenta,
+  yellow,
+  green,
+  yellowBright,
+  cyanBright,
+  magentaBright,
+  greenBright,
+} from "chalk";
 import { table } from "table";
 import { InputMode } from "./input";
 import { KeyboardEvents } from "./listeners";
@@ -94,9 +103,9 @@ export class ListFiles {
     if (!this.files) {
       return null;
     }
-    const parentDirectory = dirname(this.path.path)
-    if(checkFileExists(parentDirectory, true)){
-      const statData:Stats = statSync(parentDirectory)
+    const parentDirectory = dirname(this.path.path);
+    if (checkFileExists(parentDirectory, true)) {
+      const statData: Stats = statSync(parentDirectory);
       tableData.push([
         cyan(".."),
         magenta("dir"),
@@ -171,16 +180,28 @@ export class ListFiles {
             this.switchPath();
           },
         ],
-        ["shift+left", () => {
-          const filename = dirname(this.path.path)
-          console.clear()
-          new ListFiles({
-            path: filename,
-            exists : checkFileExists(filename, false),
-            isDirectory: checkFileExists(filename, true)
-          }, [], false)
-        }],
-        ["shift+up", () => {new Properties(this.path)}]
+        [
+          "shift+left",
+          () => {
+            const filename = dirname(this.path.path);
+            console.clear();
+            new ListFiles(
+              {
+                path: filename,
+                exists: checkFileExists(filename, false),
+                isDirectory: checkFileExists(filename, true),
+              },
+              [],
+              false
+            );
+          },
+        ],
+        [
+          "shift+up",
+          () => {
+            new Properties(this.path);
+          },
+        ],
       ])
     );
   };
