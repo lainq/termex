@@ -1,10 +1,10 @@
-import { readdirSync, readFile, statSync } from "fs";
-import { join } from "path";
+import { readdirSync, readFile, Stats, statSync } from "fs";
+import { dirname, join } from "path";
 import { checkFileExists, clearPreviousLine, File } from "./utils";
 import { chdir, cwd } from "process";
 import { CommandLineException } from "./exception";
 import { highlight } from "cli-highlight";
-import { cyan, magenta, yellow, green, yellowBright } from "chalk";
+import { cyan, magenta, yellow, green, yellowBright, cyanBright, magentaBright, greenBright } from "chalk";
 import { table } from "table";
 import { InputMode } from "./input";
 import { KeyboardEvents } from "./listeners";
@@ -83,15 +83,26 @@ export class ListFiles {
   private directories = () => {
     let tableData: Array<Array<string>> = [
       [
-        cyan("Name"),
-        magenta("Type"),
-        green("Extension"),
-        yellow("Size"),
-        green("Modified at"),
+        cyanBright("Name"),
+        magentaBright("Type"),
+        greenBright("Extension"),
+        yellowBright("Size"),
+        greenBright("Modified at"),
       ],
     ];
     if (!this.files) {
       return null;
+    }
+    const parentDirectory = dirname(this.path.path)
+    if(checkFileExists(parentDirectory, true)){
+      const statData:Stats = statSync(parentDirectory)
+      tableData.push([
+        cyan(".."),
+        magenta("dir"),
+        green("N/A"),
+        yellow(`${statData.size} bytes`),
+        green(statData.mtime.toString().split(" ").slice(0, 4).join(" ")),
+      ]);
     }
     for (let fileIndex = 0; fileIndex < this.files.length; fileIndex++) {
       const currentFileName: string = this.files[fileIndex];
@@ -159,6 +170,15 @@ export class ListFiles {
             this.switchPath();
           },
         ],
+        ["shift+left", () => {
+          const filename = dirname(this.path.path)
+          console.clear()
+          new ListFiles({
+            path: filename,
+            exists : checkFileExists(filename, false),
+            isDirectory: checkFileExists(filename, true)
+          }, [], false)
+        }]
       ])
     );
   };
