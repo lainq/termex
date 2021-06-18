@@ -21,6 +21,14 @@ export class InputMode {
     const parsedEvents = this.parseEvents(listeners);
   }
 
+  /**
+   * @private
+   *
+   * Parse the string events into real event objects
+   * for the purpose of comparison
+   *
+   * @param listeners The event listeners
+   */
   private parseEvents = (listeners: Map<string, Function>): void => {
     const events: Array<string> = Array.from(listeners.keys());
     let parsedEvents: Map<Events, Function> = new Map<Events, Function>();
@@ -46,9 +54,18 @@ export class InputMode {
       };
       parsedEvents.set(event, listeners.get(events[eventKeyIndex]));
     }
+    // Once finished parsing all the strings,
+    // Add all these keybindings
     this.addEventListeners(parsedEvents);
   };
 
+  /**
+   * @private
+   *
+   * Add keybindings
+   *
+   * @param parsedEvents
+   */
   private addEventListeners = (parsedEvents: Map<Events, Function>) => {
     stdin.on("keypress", (chunk, event: Events): void | null => {
       if (event.name == "q" || event.name == "escape") {
