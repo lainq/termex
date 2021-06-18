@@ -1,6 +1,6 @@
 import { readdirSync, readFile, statSync } from "fs";
 import { join } from "path";
-import { checkFileExists, File } from "./utils";
+import { checkFileExists, clearPreviousLine, File } from "./utils";
 import { chdir, cwd } from "process";
 import { CommandLineException } from "./exception";
 import { highlight } from "cli-highlight";
@@ -18,6 +18,7 @@ export class ListFiles {
 
   private currentFileIndex: number = 0;
   private bookmarks: Bookmarks = new Bookmarks();
+  private logIndex:number = 0;
 
   constructor(
     path: File,
@@ -56,8 +57,12 @@ export class ListFiles {
       return null;
     }
 
+    if(this.logIndex > 0){
+      clearPreviousLine()
+    }
     const currentFilename: string = this.files[this.currentFileIndex];
     console.log(yellowBright(`Selected ${currentFilename}`));
+    this.logIndex += 1
   };
 
   private create = (): any => {
@@ -148,9 +153,22 @@ export class ListFiles {
             KeyboardEvents.previewMarkdown(this.path.path);
           },
         ],
+        ['return', () => {this.switchPath()}]
       ])
     );
   };
+
+  private switchPath = ():void | null => {
+    if(!this.files) { return null }
+    const filename:string = join(cwd(), this.files[this.currentFileIndex])
+    const selectedFile: File = {
+      path: filename,
+      exists: checkFileExists(filename, false),
+      isDirectory: checkFileExists(filename),
+    };
+    console.clear()
+    new ListFiles(selectedFile, [], false)
+  }
 
   private openFile = () => {
     readFile(

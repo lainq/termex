@@ -1,9 +1,21 @@
+import { text } from "figlet";
 import { dirname } from "path";
 import { cwd } from "process";
 import { ArgumentParser, ArgumentParserResults } from "./src/arguments";
 import { CommandLineException } from "./src/exception";
 import { ListFiles } from "./src/list";
 import { checkFileExists, File } from "./src/utils";
+
+const createTitle = (titleString:string = "Termex"):void => {
+  text("Termex",{ font: 'Ghost',
+      horizontalLayout: 'default',
+      verticalLayout: 'default',
+      width: 80,
+      whitespaceBreak: true}, (error:Error, result?:string) => {
+        if(error){return null}
+        console.log(result)
+    })
+} 
 
 const initializeTermex = (filename: string, parameters: Array<string>) => {
   let file: string = filename;
