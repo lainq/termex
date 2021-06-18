@@ -9,6 +9,7 @@ import { table } from "table";
 import { InputMode } from "./input";
 import { KeyboardEvents } from "./listeners";
 import { Bookmarks } from "./bookmarks";
+import { Properties } from "./properties";
 
 export class ListFiles {
   private path: File;
@@ -178,7 +179,8 @@ export class ListFiles {
             exists : checkFileExists(filename, false),
             isDirectory: checkFileExists(filename, true)
           }, [], false)
-        }]
+        }],
+        ["shift+up", () => {new Properties(this.path)}]
       ])
     );
   };
