@@ -20,7 +20,7 @@ import { KeyboardEvents } from "./listeners";
 import { Bookmarks } from "./bookmarks";
 import { Properties } from "./properties";
 import { command } from "./command";
-import { Gitignore } from "./gitignore";
+import { Ignores } from "./ignore";
 
 export class ListFiles {
   private path: File;
@@ -41,21 +41,31 @@ export class ListFiles {
     this.parameters = parameters;
     this.showTitle = showTitle;
     this.files = this.path.isDirectory
-      ? readdirSync(this.path.path)
-          .filter((filename: string) => {
-            const onlyDirs: boolean = this.parameters.includes("only-dirs");
-            if (onlyDirs) {
-              return checkFileExists(join(this.path.path, filename), true);
-            }
-            return true;
-          })
-          .filter((fileData: string): boolean => {
-            if (this.parameters.includes("gitignore")) {
-              const gitignore = new Gitignore().ignoreFiles(this.path);
-            }
-            return true;
-          })
+      ? readdirSync(this.path.path).filter((filename: string) => {
+          const onlyDirs: boolean = this.parameters.includes("only-dirs");
+          if (onlyDirs) {
+            return checkFileExists(join(this.path.path, filename), true);
+          }
+          return true;
+        })
       : undefined;
+
+    if (this.parameters.includes("ignore")) {
+      const ignoreFiles: Array<File> = new Ignores()
+        .ignoreFiles(this.path)
+        .filter((value: File): boolean => {
+          return this.path.path != value.path;
+        });
+      this.files = this.files.filter((value: string): boolean => {
+        const filePath: string = join(this.path.path, value);
+        for (let index = 0; index < ignoreFiles.length; index++) {
+          if (ignoreFiles[index].path == filePath) {
+            return false;
+          }
+        }
+        return true;
+      });
+    }
 
     this.create();
   }
