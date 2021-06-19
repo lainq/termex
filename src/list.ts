@@ -20,7 +20,7 @@ import { KeyboardEvents } from "./listeners";
 import { Bookmarks } from "./bookmarks";
 import { Properties } from "./properties";
 import { command } from "./command";
-import { Gitignore } from './gitignore'
+import { Gitignore } from "./gitignore";
 
 export class ListFiles {
   private path: File;
@@ -41,18 +41,20 @@ export class ListFiles {
     this.parameters = parameters;
     this.showTitle = showTitle;
     this.files = this.path.isDirectory
-      ? readdirSync(this.path.path).filter((filename: string) => {
-          const onlyDirs: boolean = this.parameters.includes("only-dirs");
-          if (onlyDirs) {
-            return checkFileExists(join(this.path.path, filename), true);
-          }
-          return true;
-        }).filter((fileData:string):boolean => {
-          if(this.parameters.includes("gitignore")){
-            const gitignore = new Gitignore().ignoreFiles(this.path)
-          }
-          return true
-        })
+      ? readdirSync(this.path.path)
+          .filter((filename: string) => {
+            const onlyDirs: boolean = this.parameters.includes("only-dirs");
+            if (onlyDirs) {
+              return checkFileExists(join(this.path.path, filename), true);
+            }
+            return true;
+          })
+          .filter((fileData: string): boolean => {
+            if (this.parameters.includes("gitignore")) {
+              const gitignore = new Gitignore().ignoreFiles(this.path);
+            }
+            return true;
+          })
       : undefined;
 
     this.create();
@@ -209,7 +211,12 @@ export class ListFiles {
             new Properties(this.path);
           },
         ],
-        ["insert", () => {command(this.path)}]
+        [
+          "insert",
+          () => {
+            command(this.path);
+          },
+        ],
       ])
     );
   };
