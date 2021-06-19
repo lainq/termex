@@ -19,6 +19,7 @@ import { InputMode } from "./input";
 import { KeyboardEvents } from "./listeners";
 import { Bookmarks } from "./bookmarks";
 import { Properties } from "./properties";
+import { command } from "./command";
 
 export class ListFiles {
   private path: File;
@@ -202,6 +203,7 @@ export class ListFiles {
             new Properties(this.path);
           },
         ],
+        ["insert", command]
       ])
     );
   };
