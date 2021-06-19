@@ -1,10 +1,14 @@
 import { cyan } from "chalk"
 import { ArgumentParserResults } from "./arguments"
+import { EnvironmentVariables } from "./env"
 import { CommandLineException } from "./exception"
 import { Prompt } from "./prompt"
+import { File } from "./utils"
 
 const commands:Map<string, Function> = new Map<string, Function>([
-    ['env', () => {}]
+    ['env', (file:File, parameters:Array<string>):void => {
+        EnvironmentVariables.create(file)
+    }]
 ])
 
 interface ParseResults extends ArgumentParserResults {
@@ -13,14 +17,14 @@ interface ParseResults extends ArgumentParserResults {
 class ParseCommands {
     private command:string
 
-    constructor(command:string){
+    constructor(command:string, file:File){
         this.command = command
         
         const results:ParseResults = this.createCommand()
-        this.executeCommands(results)
+        this.executeCommands(results, file)
     }
 
-    private executeCommands = (results:ParseResults):void | null => {
+    private executeCommands = (results:ParseResults, file:File):void | null => {
         const command = results.command
         if(command.length == 0){
             return null
@@ -33,7 +37,7 @@ class ParseCommands {
         }
         const executeFunction:Function = commands.get(command)
         if(executeFunction){
-            executeFunction(results.parameters)
+            executeFunction(file, results.parameters)
         }
     }
 
@@ -52,12 +56,12 @@ class ParseCommands {
     }
 }
 
-export const command = ():void => {
+export const command = (file:File):void => {
     new Prompt({
         prompt : '',
         character : '[?]',
         callback : (userInput:string):void => {
-            new ParseCommands(userInput)
+            new ParseCommands(userInput, file)
         }
     })
 }

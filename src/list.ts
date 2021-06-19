@@ -203,7 +203,7 @@ export class ListFiles {
             new Properties(this.path);
           },
         ],
-        ["insert", command]
+        ["insert", () => {command(this.path)}]
       ])
     );
   };
