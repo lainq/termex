@@ -20,6 +20,7 @@ import { KeyboardEvents } from "./listeners";
 import { Bookmarks } from "./bookmarks";
 import { Properties } from "./properties";
 import { command } from "./command";
+import { Gitignore } from './gitignore'
 
 export class ListFiles {
   private path: File;
@@ -46,6 +47,11 @@ export class ListFiles {
             return checkFileExists(join(this.path.path, filename), true);
           }
           return true;
+        }).filter((fileData:string):boolean => {
+          if(this.parameters.includes("gitignore")){
+            const gitignore = new Gitignore().ignoreFiles(this.path)
+          }
+          return true
         })
       : undefined;
 
