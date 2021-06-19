@@ -1,8 +1,8 @@
 
 <br />
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/70764593/114295267-c9cdb780-9ac1-11eb-94aa-f864328d6845.png" aly="logo">
-  <h3 align="center">Polyglot</h3>
+  <img src="https://i.imgur.com/uP8MCw0.gif" height="120">
+  <h3 align="center"><i><strong>Termex</strong></i></h3>
 
   <p align="center">
     Find the percentage of programming languages used in your project
