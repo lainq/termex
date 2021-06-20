@@ -1,2 +1,1 @@
-
-export function displayImage(path:string):any
+export function displayImage(path: string): any;

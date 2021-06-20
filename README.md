@@ -1,4 +1,3 @@
-
 <br />
 <p align="center">
   <img src="https://i.imgur.com/uP8MCw0.gif" height="120">
@@ -22,4 +21,3 @@
   <br />
 
 </p>
-

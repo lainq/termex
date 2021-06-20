@@ -84,8 +84,8 @@ export class EnvironmentVariables {
     let envString: string = this.createEnvString(env);
     console.clear();
 
-    if(envString.trim().length == 0){
-      envString = "No .env files found"
+    if (envString.trim().length == 0) {
+      envString = "No .env files found";
     }
 
     console.log(

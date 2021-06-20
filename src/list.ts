@@ -21,8 +21,8 @@ import { Bookmarks } from "./bookmarks";
 import { Properties } from "./properties";
 import { command } from "./command";
 import { Ignores } from "./ignore";
-import { displayImage } from './image'
-import open = require('open')
+import { displayImage } from "./image";
+import open = require("open");
 
 export class ListFiles {
   private path: File;
@@ -249,26 +249,24 @@ export class ListFiles {
 
   /**
    * @private
-   * 
+   *
    * Check if an image has a valid image
    * extension
-   * 
+   *
    * @param path The path of the file
    * @returns {boolean} If the file path has a valid image extension
    */
-  private isDisplayableImage = (path:string):boolean => {
-    const extensions:Array<string> = ["png", "jpeg", "jpg", "gif"]
-    const extension:string = path.split(".").slice(-1)[0]
-    return extensions.includes(extension)
+  private isDisplayableImage = (path: string): boolean => {
+    const extensions: Array<string> = ["png", "jpeg", "jpg", "gif"];
+    const extension: string = path.split(".").slice(-1)[0];
+    return extensions.includes(extension);
+  };
 
-  }
-
-
-  private openFile = ():any => {
-    if(this.isDisplayableImage(this.path.path)){
-      console.log(yellow("Opening image..."))
-      open(this.path.path)
-      return null
+  private openFile = (): any => {
+    if (this.isDisplayableImage(this.path.path)) {
+      console.log(yellow("Opening image..."));
+      open(this.path.path);
+      return null;
     }
     readFile(
       this.path.path,
