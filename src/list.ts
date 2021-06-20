@@ -22,6 +22,7 @@ import { Properties } from "./properties";
 import { command } from "./command";
 import { Ignores } from "./ignore";
 import { displayImage } from './image'
+import open = require('open')
 
 export class ListFiles {
   private path: File;
@@ -265,7 +266,8 @@ export class ListFiles {
 
   private openFile = ():any => {
     if(this.isDisplayableImage(this.path.path)){
-      console.log(yellow("Cannot open images"))
+      console.log(yellow("Opening image..."))
+      open(this.path.path)
       return null
     }
     readFile(
