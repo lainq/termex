@@ -6,11 +6,11 @@
   <p align="center">
     Find the percentage of programming languages used in your project
     <br />
-    <a href="https://github.com/pranavbaburaj/polyglot/blob/main/docs/README.md">📖 Documentation</a>
+<!--     <a href="https://github.com/pranavbaburaj/polyglot/blob/main/docs/README.md">📖 Documentation</a> -->
     ·
-    <a href="https://github.com/pranavbaburaj/polyglot/issues">Report a Bug</a>
+    <a href="https://github.com/pranavbaburaj/termex/issues">Report a Bug</a>
     ·
-    <a href="https://github.com/pranavbaburaj/polyglot/pulls">Request Feature</a>
+    <a href="https://github.com/pranavbaburaj/termex/pulls">Request Feature</a>
   </p>
   <br>
   <p align="center">
