@@ -81,8 +81,12 @@ export class EnvironmentVariables {
     this.path = path;
 
     const env: Array<string> = this.findEnvFiles();
-    const envString: string = this.createEnvString(env);
+    let envString: string = this.createEnvString(env);
     console.clear();
+
+    if(envString.trim().length == 0){
+      envString = "No .env files found"
+    }
 
     console.log(
       boxen(envString, {

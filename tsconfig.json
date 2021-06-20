@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "allowJs" : true,
+    "outDir" : "./dist"
+  },
+  "files" : ["index.ts"],
+  "include" : ["src"]
 }
