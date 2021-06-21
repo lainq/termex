@@ -58,15 +58,15 @@ const performCommand = (result: ArgumentParserResults): Function => {
     return (): void => {
       console.log("Showing help");
     };
-  } else if (command == "history"){
-    return displayHistory
+  } else if (command == "history") {
+    return displayHistory;
   }
   return (): void => {
     initializeTermex(command, result.parameters);
   };
 };
 
-const setup = SetupTermex.createSetup()
+const setup = SetupTermex.createSetup();
 const argumentParser: ArgumentParserResults =
   new ArgumentParser().parseArguments();
 const execute: Function = performCommand(argumentParser);

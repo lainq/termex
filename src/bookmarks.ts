@@ -7,7 +7,11 @@ import boxen from "boxen";
 import { homedir } from "os";
 
 export class Bookmarks {
-  private static readonly dirname: string = join(homedir(), ".termex", "bookmarks")
+  private static readonly dirname: string = join(
+    homedir(),
+    ".termex",
+    "bookmarks"
+  );
   private static readonly path: string = join(
     Bookmarks.dirname,
     "bookmarks.json"
@@ -33,7 +37,10 @@ export class Bookmarks {
    * @param {Bookmarks} bookmarks The bookmarks object
    * @returns
    */
-  public static displayBookmarks = (bookmarks: Bookmarks, logIndex:number): void | null => {
+  public static displayBookmarks = (
+    bookmarks: Bookmarks,
+    logIndex: number
+  ): void | null => {
     const data = Array.from(bookmarks.readBookmarksFile());
 
     // Check whether the use has saved something
@@ -47,8 +54,8 @@ export class Bookmarks {
       margin: 1,
       borderStyle: "double",
     });
-    if(logIndex > 0){
-      clearPreviousLine()
+    if (logIndex > 0) {
+      clearPreviousLine();
     }
     console.log(cyanBright(box));
   };
@@ -69,7 +76,7 @@ export class Bookmarks {
     path: string,
     time: Date,
     bookmarks: Bookmarks,
-    logIndex:number
+    logIndex: number
   ): void => {
     let paths: any = Array.from(bookmarks.readBookmarksFile());
     let removed: boolean = false;
@@ -83,8 +90,8 @@ export class Bookmarks {
       paths.push(path);
     }
     bookmarks.writeFile(JSON.stringify(paths));
-    if(logIndex > 0){
-      clearPreviousLine()
+    if (logIndex > 0) {
+      clearPreviousLine();
     }
     if (removed) {
       console.log(

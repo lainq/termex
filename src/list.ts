@@ -43,8 +43,8 @@ export class ListFiles {
     this.path = path;
     this.parameters = parameters;
     this.showTitle = showTitle;
-    this.files = this.createFiles()
-    this.filterIgnore()
+    this.files = this.createFiles();
+    this.filterIgnore();
     this.create();
   }
 
@@ -58,7 +58,7 @@ export class ListFiles {
           return true;
         })
       : undefined;
-  }
+  };
 
   private filterIgnore = () => {
     if (this.parameters.includes("ignore")) {
@@ -77,7 +77,7 @@ export class ListFiles {
         return true;
       });
     }
-  }
+  };
 
   private incrementCurrentFileIndex = (
     incrementBy: number = 1
@@ -106,10 +106,10 @@ export class ListFiles {
 
   private create = (): any => {
     TermexHistory.add({
-      filename : this.path.path,
+      filename: this.path.path,
       time: new Date(),
-      isDirectory: this.path.isDirectory
-    })
+      isDirectory: this.path.isDirectory,
+    });
     if (this.path.isDirectory) {
       try {
         chdir(this.path.path);
@@ -194,14 +194,14 @@ export class ListFiles {
           "ctrl+b",
           () => {
             Bookmarks.add(cwd(), new Date(), this.bookmarks, this.logIndex);
-            this.logIndex += 1
+            this.logIndex += 1;
           },
         ],
         [
           "shift+b",
           () => {
             Bookmarks.displayBookmarks(this.bookmarks, this.logIndex);
-            this.logIndex += 1
+            this.logIndex += 1;
           },
         ],
         [
@@ -260,10 +260,10 @@ export class ListFiles {
     };
 
     console.clear();
-    this.path = selectedFile
-    this.files = this.createFiles()
-    this.currentFileIndex = 0
-    this.create()
+    this.path = selectedFile;
+    this.files = this.createFiles();
+    this.currentFileIndex = 0;
+    this.create();
   };
 
   /**
