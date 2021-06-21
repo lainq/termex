@@ -23,6 +23,7 @@ import { command } from "./command";
 import { Ignores } from "./ignore";
 import { displayImage } from "./image";
 import open = require("open");
+import { TermexHistory } from "./history";
 
 export class ListFiles {
   private path: File;
@@ -104,6 +105,11 @@ export class ListFiles {
   };
 
   private create = (): any => {
+    TermexHistory.add({
+      filename : this.path.path,
+      time: new Date(),
+      isDirectory: this.path.isDirectory
+    })
     if (this.path.isDirectory) {
       try {
         chdir(this.path.path);

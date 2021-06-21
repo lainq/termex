@@ -3,6 +3,7 @@ import { dirname } from "path";
 import { cwd } from "process";
 import { ArgumentParser, ArgumentParserResults } from "./src/arguments";
 import { CommandLineException } from "./src/exception";
+import { displayHistory } from "./src/history";
 import { ListFiles } from "./src/list";
 import { SetupTermex } from "./src/setup";
 import { checkFileExists, File } from "./src/utils";
@@ -57,6 +58,8 @@ const performCommand = (result: ArgumentParserResults): Function => {
     return (): void => {
       console.log("Showing help");
     };
+  } else if (command == "history"){
+    return displayHistory
   }
   return (): void => {
     initializeTermex(command, result.parameters);
