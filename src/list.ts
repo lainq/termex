@@ -42,7 +42,13 @@ export class ListFiles {
     this.path = path;
     this.parameters = parameters;
     this.showTitle = showTitle;
-    this.files = this.path.isDirectory
+    this.files = this.createFiles()
+    this.filterIgnore()
+    this.create();
+  }
+
+  private createFiles = () => {
+    return this.path.isDirectory
       ? readdirSync(this.path.path).filter((filename: string) => {
           const onlyDirs: boolean = this.parameters.includes("only-dirs");
           if (onlyDirs) {
@@ -51,7 +57,9 @@ export class ListFiles {
           return true;
         })
       : undefined;
+  }
 
+  private filterIgnore = () => {
     if (this.parameters.includes("ignore")) {
       const ignoreFiles: Array<File> = new Ignores()
         .ignoreFiles(this.path)
@@ -68,8 +76,6 @@ export class ListFiles {
         return true;
       });
     }
-
-    this.create();
   }
 
   private incrementCurrentFileIndex = (
@@ -78,6 +84,7 @@ export class ListFiles {
     if (!this.files) {
       return null;
     }
+
     const indexCountLimit: number = this.files.length;
     this.currentFileIndex += incrementBy;
     if (
@@ -243,8 +250,12 @@ export class ListFiles {
       exists: checkFileExists(filename, false),
       isDirectory: checkFileExists(filename),
     };
+
     console.clear();
-    new ListFiles(selectedFile, [], false);
+    this.path = selectedFile
+    this.files = this.createFiles()
+    this.currentFileIndex = 0
+    this.create()
   };
 
   /**
