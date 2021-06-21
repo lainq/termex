@@ -187,13 +187,15 @@ export class ListFiles {
         [
           "ctrl+b",
           () => {
-            Bookmarks.add(cwd(), new Date(), this.bookmarks);
+            Bookmarks.add(cwd(), new Date(), this.bookmarks, this.logIndex);
+            this.logIndex += 1
           },
         ],
         [
           "shift+b",
           () => {
-            Bookmarks.displayBookmarks(this.bookmarks);
+            Bookmarks.displayBookmarks(this.bookmarks, this.logIndex);
+            this.logIndex += 1
           },
         ],
         [

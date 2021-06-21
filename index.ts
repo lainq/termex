@@ -4,6 +4,7 @@ import { cwd } from "process";
 import { ArgumentParser, ArgumentParserResults } from "./src/arguments";
 import { CommandLineException } from "./src/exception";
 import { ListFiles } from "./src/list";
+import { SetupTermex } from "./src/setup";
 import { checkFileExists, File } from "./src/utils";
 
 const createTitle = (titleString: string = "Termex"): void => {
@@ -62,6 +63,7 @@ const performCommand = (result: ArgumentParserResults): Function => {
   };
 };
 
+const setup = SetupTermex.createSetup()
 const argumentParser: ArgumentParserResults =
   new ArgumentParser().parseArguments();
 const execute: Function = performCommand(argumentParser);
