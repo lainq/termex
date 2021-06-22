@@ -60,6 +60,8 @@ const performCommand = (result: ArgumentParserResults): Function => {
     };
   } else if (command == "history") {
     return displayHistory;
+  } else if(["%", "percent", "percentage", "polyglot"].includes(command.trim())) {
+    return () => {}
   }
   return (): void => {
     initializeTermex(command, result.parameters);

@@ -57,7 +57,9 @@ export class Ignores {
         });
       }
     }
-    return files;
+    return files.filter((element:File):boolean => {
+      return element.path != path
+    })
   };
 
   private findGitignore = (path: string): string => {
