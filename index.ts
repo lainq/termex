@@ -8,6 +8,7 @@ import { displayHistory } from "./src/history";
 import { ListFiles } from "./src/list";
 import { SetupTermex } from "./src/setup";
 import { checkFileExists, File } from "./src/utils";
+import { reportIssue } from "./src/issue";
 
 const createTitle = (titleString: string = "Termex"): void => {
   text(
@@ -67,6 +68,8 @@ const performCommand = (result: ArgumentParserResults): Function => {
     return () => {
       new ContentPercent(result.parameters);
     };
+  } else if (["issue", "report"].includes(command)) {
+    return reportIssue;
   }
   return (): void => {
     initializeTermex(command, result.parameters);

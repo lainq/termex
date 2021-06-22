@@ -11,6 +11,7 @@ interface PromptOptions {
   callback?: Function;
   // Any options
   options?: Array<string>;
+  exitPrompt?: boolean;
 }
 
 export class Prompt {
@@ -18,6 +19,7 @@ export class Prompt {
   private readonly queryCharacter: string;
   private callback?: Function;
   private options?: Array<string>;
+  private exit?: boolean;
 
   // The readline interface used to read data
   // from the command line
@@ -31,6 +33,7 @@ export class Prompt {
     this.queryCharacter = options.character;
     this.callback = options.callback;
     this.options = options.options;
+    this.exit = options.exitPrompt;
 
     this.createPrompt();
   }
@@ -41,6 +44,9 @@ export class Prompt {
       (answer: string): void => {
         if (this.callback) {
           this.callback(answer);
+        }
+        if (this.exit) {
+          this.readlineInterface.close();
         }
       }
     );

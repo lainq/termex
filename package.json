@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc index.ts --outDir ./dist --esModuleInterop true --allowJs true --declaration false & node dist/index.js"
+    "start": "tsc index.ts --outDir ./dist --esModuleInterop true --allowJs true --declaration false & node dist/index.js",
+    "lint": "npx prettier . -w"
   },
   "repository": {
     "type": "git",
