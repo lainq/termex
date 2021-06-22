@@ -20,6 +20,8 @@ export class ContentPercent {
     constructor(parameters:Array<string>){
         const files:Array<string> = new Walk(this.path, parameters).files
         const mime = this.mimeTypes(files)
+
+        console.clear()
         
         const stats:Map<string, Count> = this.createStats(mime)
         const percent:Map<string, Count> = this.createPercent(stats)

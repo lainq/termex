@@ -1,5 +1,6 @@
-import { cyan } from "chalk";
+import { cyan, yellowBright } from "chalk";
 import { ArgumentParserResults } from "./arguments";
+import { ContentPercent } from "./content";
 import { EnvironmentVariables } from "./env";
 import { CommandLineException } from "./exception";
 import { Prompt } from "./prompt";
@@ -12,6 +13,14 @@ const commands: Map<string, Function> = new Map<string, Function>([
       EnvironmentVariables.create(file);
     },
   ],
+  ["%", (file:File, parameters:Array<string>):any => {
+    if(!file.isDirectory){
+      console.log(yellowBright(`% command can only be used with directories`))
+      return null
+    }
+    console.clear()
+    const stats = new ContentPercent(parameters)
+  }]
 ]);
 
 interface ParseResults extends ArgumentParserResults {}
@@ -40,7 +49,7 @@ class ParseCommands {
           message: `${command} is not a valid command`,
         },
         false
-      );
+      ); 
       return null;
     }
     const executeFunction: Function = commands.get(command);
@@ -55,7 +64,7 @@ class ParseCommands {
     let parameters: Array<string> = new Array<string>();
     for (let index = 0; index < split.length; index++) {
       if (index == 0) {
-        command = split[index];
+        command = split[index]; 
         continue;
       }
       parameters.push(split[index]);
