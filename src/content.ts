@@ -1,15 +1,23 @@
+import { readFileSync } from "fs";
 import { lookup } from "mime-types";
 import { cwd } from "process";
 import { File } from "./utils";
 import { Walk } from "./walk";
 
+interface Count {
+    mimeType:string,
+    files:number,
+    lines:number
+}
 export class ContentPercent {
     private readonly path:string = cwd()
     
     constructor(parameters:Array<string>){
         const files:Array<string> = new Walk(this.path, parameters).files
         const mime = this.mimeTypes(files)
-        console.log(mime)
+        
+        const stats:Map<string, Count> = this.createStats(mime)
+        console.log(stats)
     }
 
     private mimeTypes = (files:Array<string>):Map<string, Array<string>> => {
@@ -30,7 +38,24 @@ export class ContentPercent {
         return typeMap 
     }
 
-    private lines = (types:Map<string, Array<string>>):any => {
-        // const keys:Array<string> = types.
+    private createStats = (types:Map<string, Array<string>>):Map<string, Count> => {
+        const keys:Array<string> = Array.from(types.keys())
+        let data:Map<string, Count> = new Map<string, Count>()
+        for(let index=0; index<keys.length; index++){
+            let linesOfCode:number = 0
+            const element:Array<string> | undefined = types.get(keys[index])
+            if(!element){ continue }
+            for(let fileIndex=0; fileIndex<element.length; fileIndex++){
+                const currentFile:string = element[fileIndex]
+                linesOfCode += readFileSync(currentFile).toString().split('\n').length
+            }
+            const count:Count = {
+                mimeType : keys[index],
+                files: element.length,
+                lines: linesOfCode
+            }
+            data.set(keys[index], count)
+        }
+        return data
     }
 }
