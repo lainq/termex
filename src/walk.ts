@@ -1,7 +1,6 @@
 import { yellowBright } from "chalk";
 import { readdirSync, statSync } from "fs"
 import { join } from "path"
-import { cwd } from "process"
 import { Ignores } from "./ignore";
 import { checkFileExists, File } from "./utils";
 

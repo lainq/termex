@@ -2,6 +2,7 @@ import { text } from "figlet";
 import { dirname } from "path";
 import { cwd } from "process";
 import { ArgumentParser, ArgumentParserResults } from "./src/arguments";
+import { ContentPercent } from "./src/content";
 import { CommandLineException } from "./src/exception";
 import { displayHistory } from "./src/history";
 import { ListFiles } from "./src/list";
@@ -61,7 +62,7 @@ const performCommand = (result: ArgumentParserResults): Function => {
   } else if (command == "history") {
     return displayHistory;
   } else if(["%", "percent", "percentage", "polyglot"].includes(command.trim())) {
-    return () => {}
+    return () => {new ContentPercent(result.parameters)}
   }
   return (): void => {
     initializeTermex(command, result.parameters);
