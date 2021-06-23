@@ -1,4 +1,4 @@
-import { cyanBright, yellowBright } from "chalk";
+import { cyan, cyanBright, yellow, yellowBright } from "chalk";
 import { readFileSync } from "fs";
 import { isBinaryFileSync } from "isbinaryfile";
 import { lookup } from "mime-types";
@@ -39,9 +39,9 @@ export class ContentPercent {
         continue;
       }
       tableData.push([
-        element.mimeType,
-        `${element.files}%`,
-        `${element.lines}%`,
+        cyan(element.mimeType),
+        yellow(`${element.files}%`),
+        yellow(`${element.lines}%`),
       ]);
     }
     console.log(table(tableData));

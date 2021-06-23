@@ -53,7 +53,7 @@ export class Prompt {
   };
 
   private createPromptString = (): string => {
-    let prompt: string = `${this.promptQuery} ${this.queryCharacter}`;
+    let prompt: string = `${this.promptQuery}${this.promptQuery.length > 0 ? " " : ""}${this.queryCharacter}`;
     let optionString: string = "";
     if (this.options) {
       for (let index = 0; index < this.options.length; index++) {

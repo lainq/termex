@@ -1,8 +1,10 @@
 import { cyan, yellowBright } from "chalk";
+import { basename } from "path";
 import { ArgumentParserResults } from "./arguments";
 import { ContentPercent } from "./content";
 import { EnvironmentVariables } from "./env";
 import { CommandLineException } from "./exception";
+import { find } from "./find";
 import { Prompt } from "./prompt";
 import { File } from "./utils";
 
@@ -13,19 +15,21 @@ const commands: Map<string, Function> = new Map<string, Function>([
       EnvironmentVariables.create(file);
     },
   ],
-  [
-    "%",
-    (file: File, parameters: Array<string>): any => {
-      if (!file.isDirectory) {
-        console.log(
-          yellowBright(`% command can only be used with directories`)
-        );
-        return null;
-      }
-      console.clear();
-      const stats = new ContentPercent(parameters);
-    },
-  ],
+  ["find", (file:File, parameters:Array<string>):any => {
+    let trimmedParameters:Array<string> = parameters.map((value:string):string => {
+      return value.trim()
+    }).filter((value:string):boolean => {
+      return value.length > 0
+    })
+    if(trimmedParameters.length == 0){
+      console.log(yellowBright(`Couldn't find results`))
+      return null
+    }
+    console.clear()
+    const searchParameter:string = trimmedParameters.join(" ")
+    console.log(yellowBright(`Searching for "${searchParameter}" in ${basename(file.path)}`))
+    const searchResults = find(file, searchParameter)
+  }]
 ]);
 
 interface ParseResults extends ArgumentParserResults {}
