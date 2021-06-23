@@ -24,6 +24,7 @@ import { Ignores } from "./ignore";
 import { displayImage } from "./image";
 import open = require("open");
 import { TermexHistory } from "./history";
+import { isBinaryFileSync } from "isbinaryfile";
 
 export class ListFiles {
   private path: File;
@@ -244,6 +245,7 @@ export class ListFiles {
             command(this.path);
           },
         ],
+        ["ctrl+c", process.exit]
       ])
     );
   };
@@ -253,17 +255,25 @@ export class ListFiles {
       return null;
     }
     const filename: string = join(cwd(), this.files[this.currentFileIndex]);
-    const selectedFile: File = {
+    let selectedFile: File = {
       path: filename,
       exists: checkFileExists(filename, false),
       isDirectory: checkFileExists(filename),
     };
+
+    const isBinary:boolean = isBinaryFileSync(filename)
+    if(isBinary){
+      selectedFile = this.path
+    }
 
     console.clear();
     this.path = selectedFile;
     this.files = this.createFiles();
     this.currentFileIndex = 0;
     this.create();
+    if(isBinary){
+      console.log(yellowBright("Cannot open binary files"))
+    }
   };
 
   /**
