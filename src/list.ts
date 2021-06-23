@@ -245,7 +245,7 @@ export class ListFiles {
             command(this.path);
           },
         ],
-        ["ctrl+c", process.exit]
+        ["ctrl+c", process.exit],
       ])
     );
   };
@@ -261,9 +261,9 @@ export class ListFiles {
       isDirectory: checkFileExists(filename),
     };
 
-    const isBinary:boolean = isBinaryFileSync(filename)
-    if(isBinary){
-      selectedFile = this.path
+    const isBinary: boolean = isBinaryFileSync(filename);
+    if (isBinary) {
+      selectedFile = this.path;
     }
 
     console.clear();
@@ -271,8 +271,9 @@ export class ListFiles {
     this.files = this.createFiles();
     this.currentFileIndex = 0;
     this.create();
-    if(isBinary){
-      console.log(yellowBright("Cannot open binary files"))
+    if (isBinary) {
+      console.log(yellowBright("Cannot open binary files"));
+      open(filename);
     }
   };
 

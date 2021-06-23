@@ -15,21 +15,30 @@ const commands: Map<string, Function> = new Map<string, Function>([
       EnvironmentVariables.create(file);
     },
   ],
-  ["find", (file:File, parameters:Array<string>):any => {
-    let trimmedParameters:Array<string> = parameters.map((value:string):string => {
-      return value.trim()
-    }).filter((value:string):boolean => {
-      return value.length > 0
-    })
-    if(trimmedParameters.length == 0){
-      console.log(yellowBright(`Couldn't find results`))
-      return null
-    }
-    console.clear()
-    const searchParameter:string = trimmedParameters.join(" ")
-    console.log(yellowBright(`Searching for "${searchParameter}" in ${basename(file.path)}`))
-    const searchResults = find(file, searchParameter)
-  }]
+  [
+    "find",
+    (file: File, parameters: Array<string>): any => {
+      let trimmedParameters: Array<string> = parameters
+        .map((value: string): string => {
+          return value.trim();
+        })
+        .filter((value: string): boolean => {
+          return value.length > 0;
+        });
+      if (trimmedParameters.length == 0) {
+        console.log(yellowBright(`Couldn't find results`));
+        return null;
+      }
+      console.clear();
+      const searchParameter: string = trimmedParameters.join(" ");
+      console.log(
+        yellowBright(
+          `Searching for "${searchParameter}" in ${basename(file.path)}`
+        )
+      );
+      const searchResults = find(file, searchParameter);
+    },
+  ],
 ]);
 
 interface ParseResults extends ArgumentParserResults {}
