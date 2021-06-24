@@ -73,20 +73,26 @@ const performCommand = (result: ArgumentParserResults): Function => {
     };
   } else if (["issue", "report"].includes(command)) {
     return reportIssue;
-  } else if(command == "rpc"){
-    return () => {const rpc = new RichPresenceSetup(result.parameters)}
-  } else if(command == "no-rpc"){
+  } else if (command == "rpc") {
     return () => {
-      writeFile(RichPresenceSettings.settingsFile, "", (error:NodeJS.ErrnoException | null):any => {
-        if(!error) {
-          console.log(yellowBright(`Disabled rpc`))
-          return null
+      const rpc = new RichPresenceSetup(result.parameters);
+    };
+  } else if (command == "no-rpc") {
+    return () => {
+      writeFile(
+        RichPresenceSettings.settingsFile,
+        "",
+        (error: NodeJS.ErrnoException | null): any => {
+          if (!error) {
+            console.log(yellowBright(`Disabled rpc`));
+            return null;
+          }
+          new CommandLineException({
+            message: "Failed to disable rpc",
+          });
         }
-        new CommandLineException({
-          message : "Failed to disable rpc"
-        })
-      })
-    }
+      );
+    };
   }
   return (): void => {
     initializeTermex(command, result.parameters);
