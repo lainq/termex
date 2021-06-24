@@ -9,6 +9,9 @@ import { ListFiles } from "./src/list";
 import { SetupTermex } from "./src/setup";
 import { checkFileExists, File } from "./src/utils";
 import { reportIssue } from "./src/issue";
+import { RichPresenceSettings, RichPresenceSetup } from "./src/discord/rpc";
+import { writeFile } from "fs";
+import { yellowBright } from "chalk";
 
 const createTitle = (titleString: string = "Termex"): void => {
   text(
@@ -70,6 +73,20 @@ const performCommand = (result: ArgumentParserResults): Function => {
     };
   } else if (["issue", "report"].includes(command)) {
     return reportIssue;
+  } else if(command == "rpc"){
+    return () => {const rpc = new RichPresenceSetup(result.parameters)}
+  } else if(command == "no-rpc"){
+    return () => {
+      writeFile(RichPresenceSettings.settingsFile, "", (error:NodeJS.ErrnoException | null):any => {
+        if(!error) {
+          console.log(yellowBright(`Disabled rpc`))
+          return null
+        }
+        new CommandLineException({
+          message : "Failed to disable rpc"
+        })
+      })
+    }
   }
   return (): void => {
     initializeTermex(command, result.parameters);
