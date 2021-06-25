@@ -32,13 +32,13 @@ export class ListFiles {
   private files?: Array<string>;
   private parameters: Array<string>;
   private showTitle: boolean;
-  private addedEventListener:boolean = false
+  private addedEventListener: boolean = false;
 
   private currentFileIndex: number = 0;
   private bookmarks: Bookmarks = new Bookmarks();
   private logIndex: number = 0;
 
-  private rpc:TermexDiscordRPC = new TermexDiscordRPC()
+  private rpc: TermexDiscordRPC = new TermexDiscordRPC();
 
   constructor(
     path: File,
@@ -51,10 +51,10 @@ export class ListFiles {
     this.files = this.createFiles();
     this.filterIgnore();
 
-    setInterval(():void => {
-      this.rpc.start(this.path.path)
-      console.log(this.path.path)
-    }, 15e3)
+    setInterval((): void => {
+      this.rpc.start(this.path.path);
+      console.log(this.path.path);
+    }, 15e3);
 
     this.create();
   }
@@ -174,7 +174,11 @@ export class ListFiles {
       const modifiedTime: Date = fileStats.mtime;
 
       tableData.push([
-        cyan(currentFileName.length >= 30 ? currentFileName.slice(0, 30-currentFileName.length-3) + ".." : currentFileName),
+        cyan(
+          currentFileName.length >= 30
+            ? currentFileName.slice(0, 30 - currentFileName.length - 3) + ".."
+            : currentFileName
+        ),
         magenta(fileType),
         green(extension),
         yellow(`${size} bytes`),
@@ -186,8 +190,8 @@ export class ListFiles {
   };
 
   public createInputMode = (): any => {
-    if(this.addedEventListener){
-      return null
+    if (this.addedEventListener) {
+      return null;
     }
     const inputMode = new InputMode(
       new Map<string, Function>([
@@ -233,7 +237,7 @@ export class ListFiles {
         [
           "shift+left",
           () => {
-            this.switchPath(dirname(this.path.path))
+            this.switchPath(dirname(this.path.path));
           },
         ],
         [
@@ -251,22 +255,24 @@ export class ListFiles {
         ["ctrl+c", process.exit],
       ])
     );
-    this.addedEventListener = true
+    this.addedEventListener = true;
   };
 
-  private switchPath = (file?:string): void | null => {
+  private switchPath = (file?: string): void | null => {
     if (!this.files) {
       return null;
     }
-    const filename: string = file || join(cwd(), this.files[this.currentFileIndex]);
+    const filename: string =
+      file || join(cwd(), this.files[this.currentFileIndex]);
     let selectedFile: File = {
       path: filename,
       exists: checkFileExists(filename, false),
       isDirectory: checkFileExists(filename),
     };
 
-    
-    const isBinary: boolean = selectedFile.isDirectory ? false : isBinaryFileSync(filename);
+    const isBinary: boolean = selectedFile.isDirectory
+      ? false
+      : isBinaryFileSync(filename);
     if (isBinary) {
       selectedFile = this.path;
     }

@@ -73,13 +73,13 @@ const performCommand = (result: ArgumentParserResults): Function => {
         }
       );
     };
-  } else if(command == "last") {
-    return openLast
-  } else if(command == "clear-history") {
+  } else if (command == "last") {
+    return openLast;
+  } else if (command == "clear-history") {
     return () => {
-      TermexHistory.writeFile(JSON.stringify([]))
-      console.log(yellowBright("Cleared your termex history"))
-    }
+      TermexHistory.writeFile(JSON.stringify([]));
+      console.log(yellowBright("Cleared your termex history"));
+    };
   }
   return (): void => {
     initializeTermex(command, result.parameters);

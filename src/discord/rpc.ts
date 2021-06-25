@@ -11,11 +11,11 @@ import { RichPresenceSettings } from "./settings";
 export class TermexDiscordRPC {
   private client: Client = new Client({ transport: "ipc" });
   private startTimestamp: Date = new Date();
-  private clientId:string | null = RichPresenceSettings.getClientId()
+  private clientId: string | null = RichPresenceSettings.getClientId();
 
   constructor() {
-    const clientId = this.clientId
-    if(clientId != null){
+    const clientId = this.clientId;
+    if (clientId != null) {
       this.client.login({ clientId }).catch((reason: any): void => {});
     }
   }
@@ -36,73 +36,88 @@ export class TermexDiscordRPC {
     });
   };
 
-  public start = (filename:string):any => {
-    if(!this.clientId){ return null }
-    this.createRichPresence(this.clientId, filename)
-  }
+  public start = (filename: string): any => {
+    if (!this.clientId) {
+      return null;
+    }
+    this.createRichPresence(this.clientId, filename);
+  };
 
   private createRichPresence = (
     clientId: string,
     filename: string
     // timeout: number = 15e3
   ): void => {
-    console.log("going to set")
-    this.setActivity(filename)
+    console.log("going to set");
+    this.setActivity(filename);
   };
 }
 
-
 export class RichPresenceSetup {
   private parameters: Array<string>;
-  private readlineInterface:Interface = createInterface({
+  private readlineInterface: Interface = createInterface({
     input: stdin,
-    output: stdout
-  })
+    output: stdout,
+  });
 
   constructor(parameters: Array<string>) {
     this.parameters = parameters;
 
     const enable = this.parameters.includes("enable");
     if (enable) {
-      this.enableRichPresence()
+      this.enableRichPresence();
     } else {
-      this.displayStatus()
-    } 
+      this.displayStatus();
+    }
   }
 
-  private displayStatus = ():any => {
-    const clientId:string | null = RichPresenceSettings.getClientId()
-    if(!clientId){
-      console.log(`${cyanBright("Enabled:")} ${redBright("False")}`)
-      process.exit()
+  private displayStatus = (): any => {
+    const clientId: string | null = RichPresenceSettings.getClientId();
+    if (!clientId) {
+      console.log(`${cyanBright("Enabled:")} ${redBright("False")}`);
+      process.exit();
     }
-    console.log(`${cyanBright("Enabled:")} ${yellowBright("True")}`)
-  }
+    console.log(`${cyanBright("Enabled:")} ${yellowBright("True")}`);
+  };
 
-  private enableRichPresence = ():any => {
-    const clientId:string | null = RichPresenceSettings.getClientId()
-    if(clientId != null){
-      console.log(yellowBright("RPC is already enabled"))
-      process.exit()
+  private enableRichPresence = (): any => {
+    const clientId: string | null = RichPresenceSettings.getClientId();
+    if (clientId != null) {
+      console.log(yellowBright("RPC is already enabled"));
+      process.exit();
     }
-    const numbers:Array<string> = Array.from(Array(10).keys()).map((value:number):string => {return value.toString()})
-    const key = this.readlineInterface.question(cyanBright("Client Id [?] "), (solution:string):void => {
-      const match:Array<string> = solution.trim().split("").filter((value:string):boolean => {
-        return numbers.includes(value)
-      })
-      if(match.length != solution.length){
-        new CommandLineException({
-          message: "Invalid client id"
-        })
+    const numbers: Array<string> = Array.from(Array(10).keys()).map(
+      (value: number): string => {
+        return value.toString();
       }
-      writeFile(RichPresenceSettings.settingsFile, solution.trim(), (error:NodeJS.ErrnoException | null):any => {
-        if(error){
-          new CommandLineException({message:error.toString()})
+    );
+    const key = this.readlineInterface.question(
+      cyanBright("Client Id [?] "),
+      (solution: string): void => {
+        const match: Array<string> = solution
+          .trim()
+          .split("")
+          .filter((value: string): boolean => {
+            return numbers.includes(value);
+          });
+        if (match.length != solution.length) {
+          new CommandLineException({
+            message: "Invalid client id",
+          });
         }
-      })
-      this.readlineInterface.close()
-    })
-  }
+        writeFile(
+          RichPresenceSettings.settingsFile,
+          solution.trim(),
+          (error: NodeJS.ErrnoException | null): any => {
+            if (error) {
+              new CommandLineException({ message: error.toString() });
+            }
+          }
+        );
+        this.readlineInterface.close();
+      }
+    );
+  };
 }
 
 // const key = RichPresenceSettings.getClientId()
