@@ -32,6 +32,7 @@ export class ListFiles {
   private files?: Array<string>;
   private parameters: Array<string>;
   private showTitle: boolean;
+  private addedEventListener:boolean = false
 
   private currentFileIndex: number = 0;
   private bookmarks: Bookmarks = new Bookmarks();
@@ -184,7 +185,10 @@ export class ListFiles {
     this.createInputMode();
   };
 
-  public createInputMode = (): void => {
+  public createInputMode = (): any => {
+    if(this.addedEventListener){
+      return null
+    }
     const inputMode = new InputMode(
       new Map<string, Function>([
         [
@@ -257,6 +261,7 @@ export class ListFiles {
         ["ctrl+c", process.exit],
       ])
     );
+    this.addedEventListener = true
   };
 
   private switchPath = (): void | null => {
@@ -270,7 +275,8 @@ export class ListFiles {
       isDirectory: checkFileExists(filename),
     };
 
-    const isBinary: boolean = isBinaryFileSync(filename);
+    
+    const isBinary: boolean = selectedFile.isDirectory ? false : isBinaryFileSync(filename);
     if (isBinary) {
       selectedFile = this.path;
     }
