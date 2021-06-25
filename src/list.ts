@@ -160,7 +160,7 @@ export class ListFiles {
       ]);
     }
     for (let fileIndex = 0; fileIndex < this.files.length; fileIndex++) {
-      const currentFileName: string = this.files[fileIndex];
+      let currentFileName: string = this.files[fileIndex];
       const fileStats: any = statSync(join(this.path.path, currentFileName));
       const fileType: string = checkFileExists(
         join(this.path.path, currentFileName),
@@ -174,7 +174,7 @@ export class ListFiles {
       const modifiedTime: Date = fileStats.mtime;
 
       tableData.push([
-        cyan(currentFileName),
+        cyan(currentFileName.length >= 30 ? currentFileName.slice(0, 30-currentFileName.length-3) + ".." : currentFileName),
         magenta(fileType),
         green(extension),
         yellow(`${size} bytes`),

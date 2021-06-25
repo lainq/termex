@@ -48,7 +48,7 @@ export class TermexHistory {
     }
   };
 
-  private static writeFile = (content: string): void => {
+  public static writeFile = (content: string): void => {
     writeFileSync(TermexHistory.filename, content);
   };
 }

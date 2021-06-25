@@ -3,7 +3,7 @@ import { cwd } from "process";
 import { ArgumentParser, ArgumentParserResults } from "./src/arguments";
 import { ContentPercent } from "./src/content";
 import { CommandLineException } from "./src/exception";
-import { displayHistory } from "./src/history";
+import { displayHistory, TermexHistory } from "./src/history";
 import { SetupTermex } from "./src/setup";
 import { reportIssue } from "./src/issue";
 import { RichPresenceSetup } from "./src/discord/rpc";
@@ -75,6 +75,11 @@ const performCommand = (result: ArgumentParserResults): Function => {
     };
   } else if(command == "last") {
     return openLast
+  } else if(command == "clear-history") {
+    return () => {
+      TermexHistory.writeFile(JSON.stringify([]))
+      console.log(yellowBright("Cleared your termex history"))
+    }
   }
   return (): void => {
     initializeTermex(command, result.parameters);
