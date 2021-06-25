@@ -1,17 +1,17 @@
 import { text } from "figlet";
-import { dirname } from "path";
 import { cwd } from "process";
 import { ArgumentParser, ArgumentParserResults } from "./src/arguments";
 import { ContentPercent } from "./src/content";
 import { CommandLineException } from "./src/exception";
 import { displayHistory } from "./src/history";
-import { ListFiles } from "./src/list";
 import { SetupTermex } from "./src/setup";
-import { checkFileExists, File } from "./src/utils";
 import { reportIssue } from "./src/issue";
-import { RichPresenceSettings, RichPresenceSetup, TermexDiscordRPC } from "./src/discord/rpc";
+import { RichPresenceSetup } from "./src/discord/rpc";
 import { writeFile } from "fs";
 import { yellowBright } from "chalk";
+import { RichPresenceSettings } from "./src/discord/settings";
+import { openLast } from "./src/last";
+import { initializeTermex } from "./src/init";
 
 const createTitle = (titleString: string = "Termex"): void => {
   text(
@@ -30,26 +30,6 @@ const createTitle = (titleString: string = "Termex"): void => {
       console.log(result);
     }
   );
-};
-
-const initializeTermex = (filename: string, parameters: Array<string>) => {
-  let file: string = filename;
-  if (filename === "..") {
-    file = dirname(filename);
-  } else if (filename == ".") {
-    file = cwd();
-  }
-  const fileObject: File = {
-    path: file,
-    exists: checkFileExists(filename, false),
-    isDirectory: checkFileExists(filename),
-  };
-  if (!fileObject.exists) {
-    new CommandLineException({
-      message: `${file} does not exist`,
-    });
-  }  
-  const ls = new ListFiles(fileObject, parameters);
 };
 
 const performCommand = (result: ArgumentParserResults): Function => {
@@ -93,6 +73,8 @@ const performCommand = (result: ArgumentParserResults): Function => {
         }
       );
     };
+  } else if(command == "last") {
+    return openLast
   }
   return (): void => {
     initializeTermex(command, result.parameters);

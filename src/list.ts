@@ -233,17 +233,7 @@ export class ListFiles {
         [
           "shift+left",
           () => {
-            const filename = dirname(this.path.path);
-            console.clear();
-            new ListFiles(
-              {
-                path: filename,
-                exists: checkFileExists(filename, false),
-                isDirectory: checkFileExists(filename, true),
-              },
-              [],
-              false
-            );
+            this.switchPath(dirname(this.path.path))
           },
         ],
         [
@@ -264,11 +254,11 @@ export class ListFiles {
     this.addedEventListener = true
   };
 
-  private switchPath = (): void | null => {
+  private switchPath = (file?:string): void | null => {
     if (!this.files) {
       return null;
     }
-    const filename: string = join(cwd(), this.files[this.currentFileIndex]);
+    const filename: string = file || join(cwd(), this.files[this.currentFileIndex]);
     let selectedFile: File = {
       path: filename,
       exists: checkFileExists(filename, false),
