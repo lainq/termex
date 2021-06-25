@@ -9,7 +9,7 @@ import { ListFiles } from "./src/list";
 import { SetupTermex } from "./src/setup";
 import { checkFileExists, File } from "./src/utils";
 import { reportIssue } from "./src/issue";
-import { RichPresenceSettings, RichPresenceSetup } from "./src/discord/rpc";
+import { RichPresenceSettings, RichPresenceSetup, TermexDiscordRPC } from "./src/discord/rpc";
 import { writeFile } from "fs";
 import { yellowBright } from "chalk";
 
@@ -48,7 +48,7 @@ const initializeTermex = (filename: string, parameters: Array<string>) => {
     new CommandLineException({
       message: `${file} does not exist`,
     });
-  }
+  }  
   const ls = new ListFiles(fileObject, parameters);
 };
 
@@ -84,7 +84,7 @@ const performCommand = (result: ArgumentParserResults): Function => {
         "",
         (error: NodeJS.ErrnoException | null): any => {
           if (!error) {
-            console.log(yellowBright(`Disabled rpc`));
+            console.log(yellowBright(`Disabled RPC`));
             return null;
           }
           new CommandLineException({

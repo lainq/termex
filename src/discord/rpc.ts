@@ -29,10 +29,17 @@ export class RichPresenceSettings {
 export class TermexDiscordRPC {
   private client: Client = new Client({ transport: "ipc" });
   private startTimestamp: Date = new Date();
+  private clientId:string | null = RichPresenceSettings.getClientId()
 
-  private setActivity = async (filename: string): Promise<any> => {
+  constructor() {
+    const clientId = this.clientId
+    if(clientId != null){
+      this.client.login({ clientId }).catch((reason: any): void => {});
+    }
+  }
+
+  public setActivity = async (filename: string): Promise<any> => {
     if (!this.client) {
-      console.log("No client");
       return null;
     }
     this.client.setActivity({
@@ -47,20 +54,18 @@ export class TermexDiscordRPC {
     });
   };
 
-  public createRichPresence = (
-    clientId: string,
-    filename: string,
-    timeout: number = 15e3
-  ): void => {
-    this.client.on("ready", (): void => {
-      this.setActivity(filename);
-      console.log(yellowBright("Discord RPC has started"));
-      setInterval(() => {
-        this.setActivity(filename);
-      }, timeout);
-    });
+  public start = (filename:string):any => {
+    if(!this.clientId){ return null }
+    this.createRichPresence(this.clientId, filename)
+  }
 
-    this.client.login({ clientId }).catch((reason: any): void => {});
+  private createRichPresence = (
+    clientId: string,
+    filename: string
+    // timeout: number = 15e3
+  ): void => {
+    console.log("going to set")
+    this.setActivity(filename)
   };
 }
 
@@ -81,7 +86,6 @@ export class RichPresenceSetup {
     } else {
       this.displayStatus()
     } 
-    process.exit()
   }
 
   private displayStatus = ():any => {

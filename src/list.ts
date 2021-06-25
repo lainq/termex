@@ -25,6 +25,7 @@ import { displayImage } from "./image";
 import open = require("open");
 import { TermexHistory } from "./history";
 import { isBinaryFileSync } from "isbinaryfile";
+import { TermexDiscordRPC } from "./discord/rpc";
 
 export class ListFiles {
   private path: File;
@@ -36,6 +37,8 @@ export class ListFiles {
   private bookmarks: Bookmarks = new Bookmarks();
   private logIndex: number = 0;
 
+  private rpc:TermexDiscordRPC = new TermexDiscordRPC()
+
   constructor(
     path: File,
     parameters: Array<string>,
@@ -46,6 +49,12 @@ export class ListFiles {
     this.showTitle = showTitle;
     this.files = this.createFiles();
     this.filterIgnore();
+
+    setInterval(():void => {
+      this.rpc.start(this.path.path)
+      console.log(this.path.path)
+    }, 15e3)
+
     this.create();
   }
 
