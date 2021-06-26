@@ -184,11 +184,11 @@ export class ListFiles {
           yellow(`${size} bytes`),
           green(modifiedTime.toString().split(" ").slice(0, 4).join(" ")),
         ]);
-      } catch(exception:any) {
-        continue
+      } catch (exception: any) {
+        continue;
       }
     }
-    const tableString = table(tableData)
+    const tableString = table(tableData);
     console.log(tableString);
     this.createInputMode();
   };
@@ -257,10 +257,13 @@ export class ListFiles {
           },
         ],
         ["ctrl+c", process.exit],
-        ["ctrl+r", () => {
-          console.clear()
-          this.create()
-        }]
+        [
+          "ctrl+r",
+          () => {
+            console.clear();
+            this.create();
+          },
+        ],
       ])
     );
     this.addedEventListener = true;
@@ -327,7 +330,7 @@ export class ListFiles {
         }
         const dataToString: string = data.toString();
         console.log(highlight(dataToString));
-        this.createInputMode()
+        this.createInputMode();
       }
     );
   };

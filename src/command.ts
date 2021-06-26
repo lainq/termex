@@ -39,13 +39,18 @@ const commands: Map<string, Function> = new Map<string, Function>([
       const searchResults = find(file, searchParameter);
     },
   ],
-  ["%", (file:File, parameters:Array<string>):any => {
-    if(!file.isDirectory){
-      console.log(yellowBright("% command can only be used inside of directories"))
-      return null
-    }
-    const percent = new ContentPercent(parameters, file.path)
-  }]
+  [
+    "%",
+    (file: File, parameters: Array<string>): any => {
+      if (!file.isDirectory) {
+        console.log(
+          yellowBright("% command can only be used inside of directories")
+        );
+        return null;
+      }
+      const percent = new ContentPercent(parameters, file.path);
+    },
+  ],
 ]);
 
 interface ParseResults extends ArgumentParserResults {}

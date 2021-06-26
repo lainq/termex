@@ -81,10 +81,10 @@ const performCommand = (result: ArgumentParserResults): Function => {
       TermexHistory.writeFile(JSON.stringify([]));
       console.log(yellowBright("Cleared your termex history"));
     };
-  } else if(command == "files") {
+  } else if (command == "files") {
     return () => {
-      const files = new DirectoryFiles(process.cwd(), result.parameters)
-    }
+      const files = new DirectoryFiles(process.cwd(), result.parameters);
+    };
   }
   return (): void => {
     initializeTermex(command, result.parameters);

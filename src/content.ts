@@ -17,8 +17,8 @@ export class ContentPercent {
   private files: number = 0;
   private lines: number = 0;
 
-  constructor(parameters: Array<string>, path:string=cwd()) {
-    this.path = path
+  constructor(parameters: Array<string>, path: string = cwd()) {
+    this.path = path;
     const files: Array<string> = new Walk(this.path, parameters).files;
     const mime = this.mimeTypes(files);
 
