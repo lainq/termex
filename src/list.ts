@@ -253,6 +253,10 @@ export class ListFiles {
           },
         ],
         ["ctrl+c", process.exit],
+        ["ctrl+r", () => {
+          console.clear()
+          this.create()
+        }]
       ])
     );
     this.addedEventListener = true;

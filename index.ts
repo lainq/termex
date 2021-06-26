@@ -12,6 +12,7 @@ import { yellowBright } from "chalk";
 import { RichPresenceSettings } from "./src/discord/settings";
 import { openLast } from "./src/last";
 import { initializeTermex } from "./src/init";
+import { DirectoryFiles } from "./src/files";
 
 const createTitle = (titleString: string = "Termex"): void => {
   text(
@@ -80,6 +81,10 @@ const performCommand = (result: ArgumentParserResults): Function => {
       TermexHistory.writeFile(JSON.stringify([]));
       console.log(yellowBright("Cleared your termex history"));
     };
+  } else if(command == "files") {
+    return () => {
+      const files = new DirectoryFiles(process.cwd(), result.parameters)
+    }
   }
   return (): void => {
     initializeTermex(command, result.parameters);
