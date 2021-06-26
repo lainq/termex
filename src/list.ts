@@ -53,7 +53,6 @@ export class ListFiles {
 
     setInterval((): void => {
       this.rpc.start(this.path.path);
-      console.log(this.path.path);
     }, 15e3);
 
     this.create();
@@ -189,7 +188,8 @@ export class ListFiles {
         continue
       }
     }
-    console.log(table(tableData));
+    const tableString = table(tableData)
+    console.log(tableString);
     this.createInputMode();
   };
 
