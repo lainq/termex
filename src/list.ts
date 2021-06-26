@@ -160,30 +160,34 @@ export class ListFiles {
       ]);
     }
     for (let fileIndex = 0; fileIndex < this.files.length; fileIndex++) {
-      let currentFileName: string = this.files[fileIndex];
-      const fileStats: any = statSync(join(this.path.path, currentFileName));
-      const fileType: string = checkFileExists(
-        join(this.path.path, currentFileName),
-        true
-      )
-        ? "dir"
-        : "file";
-      const extension: string =
-        fileType == "dir" ? "N/A" : currentFileName.split(".").slice(-1)[0];
-      const size: number = fileStats.size;
-      const modifiedTime: Date = fileStats.mtime;
+      try {
+        let currentFileName: string = this.files[fileIndex];
+        const fileStats: any = statSync(join(this.path.path, currentFileName));
+        const fileType: string = checkFileExists(
+          join(this.path.path, currentFileName),
+          true
+        )
+          ? "dir"
+          : "file";
+        const extension: string =
+          fileType == "dir" ? "N/A" : currentFileName.split(".").slice(-1)[0];
+        const size: number = fileStats.size;
+        const modifiedTime: Date = fileStats.mtime;
 
-      tableData.push([
-        cyan(
-          currentFileName.length >= 30
-            ? currentFileName.slice(0, 30 - currentFileName.length - 3) + ".."
-            : currentFileName
-        ),
-        magenta(fileType),
-        green(extension),
-        yellow(`${size} bytes`),
-        green(modifiedTime.toString().split(" ").slice(0, 4).join(" ")),
-      ]);
+        tableData.push([
+          cyan(
+            currentFileName.length >= 30
+              ? currentFileName.slice(0, 30 - currentFileName.length - 3) + ".."
+              : currentFileName
+          ),
+          magenta(fileType),
+          green(extension),
+          yellow(`${size} bytes`),
+          green(modifiedTime.toString().split(" ").slice(0, 4).join(" ")),
+        ]);
+      } catch(exception:any) {
+        continue
+      }
     }
     console.log(table(tableData));
     this.createInputMode();
@@ -323,8 +327,8 @@ export class ListFiles {
         }
         const dataToString: string = data.toString();
         console.log(highlight(dataToString));
+        this.createInputMode()
       }
     );
-    this.createInputMode();
   };
 }
