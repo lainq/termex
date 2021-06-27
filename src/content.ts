@@ -8,8 +8,13 @@ import { File } from "./utils";
 import { Walk } from "./walk";
 
 interface Count {
+  // The mime type of the file
   mimeType: string;
+  // The number of files present in the current directory
+  // with the specific mime-type
   files: number;
+  // The lines of code present in all the files 
+  // with the specific mime-type(in the current directory)
   lines: number;
 }
 export class ContentPercent {
@@ -17,6 +22,11 @@ export class ContentPercent {
   private files: number = 0;
   private lines: number = 0;
 
+  /**
+   * @constructor
+   * @param {Array<string>} parameters The command line parameters
+   * @param {string} path The path to check for files
+   */
   constructor(parameters: Array<string>, path: string = cwd()) {
     this.path = path;
     const files: Array<string> = new Walk(this.path, parameters).files;
@@ -30,6 +40,14 @@ export class ContentPercent {
     this.displayTable(percent);
   }
 
+  /**
+   * @private
+   * 
+   * Display the data onto the screen in the form
+   * of a table
+   * 
+   * @param data The calculated data to display to the screen
+   */
   private displayTable = (data: Map<string, Count>): void => {
     let tableData: Array<Array<string>> = [
       [cyanBright("Type"), yellowBright("Files"), yellowBright("Lines")],
@@ -48,6 +66,14 @@ export class ContentPercent {
     console.log(table(tableData));
   };
 
+  /**
+   * @private
+   * 
+   * Convert the data in numbers to percent
+   * 
+   * @param {Map<string, Count>} stats The current stats based on numbers
+   * @returns {Map<string, Count>} The new stats based on percent
+   */
   private createPercent = (stats: Map<string, Count>): Map<string, Count> => {
     let percent: Map<string, Count> = stats;
     let keys: Array<string> = Array.from(percent.keys());
@@ -65,6 +91,13 @@ export class ContentPercent {
     return percent;
   };
 
+  /**
+   * @private
+   * 
+   * Get the mime-type of each file
+   * @param {Array<string>} files The array of file in the current directory(sub directories included)
+   * @returns {Map<string, Array<string>>}
+   */
   private mimeTypes = (files: Array<string>): Map<string, Array<string>> => {
     let typeMap: Map<string, Array<string>> = new Map<string, Array<string>>();
     for (let index = 0; index < files.length; index++) {

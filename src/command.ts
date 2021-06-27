@@ -10,12 +10,14 @@ import { File } from "./utils";
 
 const commands: Map<string, Function> = new Map<string, Function>([
   [
+    // Read data from all.env files in the current directory
     "env",
     (file: File, parameters: Array<string>): void => {
       EnvironmentVariables.create(file);
     },
   ],
   [
+    // find a specific file from the current directory
     "find",
     (file: File, parameters: Array<string>): any => {
       let trimmedParameters: Array<string> = parameters
@@ -40,6 +42,8 @@ const commands: Map<string, Function> = new Map<string, Function>([
     },
   ],
   [
+    // Get the percentage of differnt types of files used in
+    // the current directory.
     "%",
     (file: File, parameters: Array<string>): any => {
       if (!file.isDirectory) {

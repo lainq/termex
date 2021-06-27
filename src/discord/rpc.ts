@@ -13,6 +13,10 @@ export class TermexDiscordRPC {
   private startTimestamp: Date = new Date();
   private clientId: string | null = RichPresenceSettings.getClientId();
 
+  /**
+   * @constructor
+   * Login using the discord client Id stored in the settings file
+   */
   constructor() {
     const clientId = this.clientId;
     if (clientId != null) {
@@ -20,6 +24,14 @@ export class TermexDiscordRPC {
     }
   }
 
+  /**
+   * @public
+   * @param filename 
+   * 
+   * Set the use activity based on the filename passed in
+   * 
+   * @returns 
+   */
   public setActivity = async (filename: string): Promise<any> => {
     if (!this.client) {
       return null;
@@ -36,6 +48,11 @@ export class TermexDiscordRPC {
     });
   };
 
+  /**
+   * @public
+   * @param {string} filename The filename to display in the rpc
+   * @returns 
+   */
   public start = (filename: string): any => {
     if (!this.clientId) {
       return null;
@@ -60,6 +77,11 @@ export class RichPresenceSetup {
     output: stdout,
   });
 
+  /**
+   * @constructor
+   * @param {string[]} parameters The parameters passed in along with the command. Checks
+   * for --enable flag and enables Discord RPC
+   */
   constructor(parameters: Array<string>) {
     this.parameters = parameters;
 

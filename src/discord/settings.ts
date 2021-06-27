@@ -10,6 +10,15 @@ export class RichPresenceSettings {
     ".rpc"
   );
 
+  /**
+   * @public
+   * @static
+   * 
+   * Read the settings file and get the client
+   * id stored in it
+   * 
+   * @returns {string | null} The client id
+   */
   public static getClientId = (): string | null => {
     if (!checkFileExists(RichPresenceSettings.settingsFile, false)) {
       return null;
