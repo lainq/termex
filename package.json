@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc index.ts --outDir ./dist --esModuleInterop true --allowJs true --declaration false & node dist/index.js",
-    "lint": "npx prettier . -w"
+    "start": "ts-node index.ts . --ignore",
+    "lint": "npx prettier . -w",
+    "build": "tsc index.ts --esModuleInterop true --allowJs true --outDir ./dist"
   },
   "repository": {
     "type": "git",
@@ -33,12 +33,17 @@
     "mime-types": "^2.1.31",
     "open": "^8.2.0",
     "table": "^6.7.1",
-    "typescript" : "^4.3.4"
+    "typescript": "^4.3.4",
+    "discord-rpc": "^4.0.1"
   },
   "devDependencies": {
     "@types/discord-rpc": "^3.0.5",
     "@types/figlet": "^1.5.1",
     "@types/marked": "^2.0.3",
-    "@types/marked-terminal": "^3.1.1"
+    "@types/marked-terminal": "^3.1.1",
+    "ts-node": "^10.0.0"
+  },
+  "bin": {
+    "termex": "./bin/termex"
   }
 }
