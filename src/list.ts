@@ -270,9 +270,6 @@ export class ListFiles {
   };
 
   private switchPath = (file?: string): void | null => {
-    if (!this.files) {
-      return null;
-    }
     const filename: string =
       file || join(cwd(), this.files[this.currentFileIndex]);
     let selectedFile: File = {
