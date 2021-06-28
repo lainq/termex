@@ -26,33 +26,34 @@ export class TermexDiscordRPC {
 
   /**
    * @public
-   * @param filename 
-   * 
+   * @param filename
+   *
    * Set the use activity based on the filename passed in
-   * 
-   * @returns 
+   *
+   * @returns
    */
   public setActivity = async (filename: string): Promise<any> => {
     if (!this.client) {
       return null;
     }
-    this.client.setActivity({
-      details: `Termex`,
-      state: `Messing up with ${filename}`,
-      startTimestamp: this.startTimestamp,
-      largeImageKey: "termex",
-      largeImageText: "Termex",
-      // smallImageKey: 'snek_small',
-      // smallImageText: 'i am my own pillows',
-      instance: false,
-    }).catch((reason:any):void => {
-    })
+    this.client
+      .setActivity({
+        details: `Termex`,
+        state: `Messing up with ${filename}`,
+        startTimestamp: this.startTimestamp,
+        largeImageKey: "termex",
+        largeImageText: "Termex",
+        // smallImageKey: 'snek_small',
+        // smallImageText: 'i am my own pillows',
+        instance: false,
+      })
+      .catch((reason: any): void => {});
   };
 
   /**
    * @public
    * @param {string} filename The filename to display in the rpc
-   * @returns 
+   * @returns
    */
   public start = (filename: string): any => {
     if (!this.clientId) {

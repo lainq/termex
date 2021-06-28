@@ -13,7 +13,7 @@ interface Count {
   // The number of files present in the current directory
   // with the specific mime-type
   files: number;
-  // The lines of code present in all the files 
+  // The lines of code present in all the files
   // with the specific mime-type(in the current directory)
   lines: number;
 }
@@ -42,10 +42,10 @@ export class ContentPercent {
 
   /**
    * @private
-   * 
+   *
    * Display the data onto the screen in the form
    * of a table
-   * 
+   *
    * @param data The calculated data to display to the screen
    */
   private displayTable = (data: Map<string, Count>): void => {
@@ -68,9 +68,9 @@ export class ContentPercent {
 
   /**
    * @private
-   * 
+   *
    * Convert the data in numbers to percent
-   * 
+   *
    * @param {Map<string, Count>} stats The current stats based on numbers
    * @returns {Map<string, Count>} The new stats based on percent
    */
@@ -93,7 +93,7 @@ export class ContentPercent {
 
   /**
    * @private
-   * 
+   *
    * Get the mime-type of each file
    * @param {Array<string>} files The array of file in the current directory(sub directories included)
    * @returns {Map<string, Array<string>>}

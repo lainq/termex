@@ -1,6 +1,13 @@
 import boxen from "boxen";
 import { greenBright, redBright, yellowBright } from "chalk";
-import { mkdir, readdirSync, readFile, statSync, writeFile, writeFileSync } from "fs";
+import {
+  mkdir,
+  readdirSync,
+  readFile,
+  statSync,
+  writeFile,
+  writeFileSync,
+} from "fs";
 import marked from "marked";
 import TerminalRenderer from "marked-terminal";
 import { join } from "path";
@@ -131,35 +138,46 @@ export class KeyboardEvents {
     );
   };
 
-  public static createFile = (file:File, reloadFunction:Function):void => {
+  public static createFile = (file: File, reloadFunction: Function): void => {
     new Prompt({
-      prompt : "Enter the filename",
+      prompt: "Enter the filename",
       character: "[?]",
-      callback : (filename:string):any => {
-        if(!file.isDirectory){
-          console.log(yellowBright("You have to be inside of a directory to perform this action"))
-          return null
+      callback: (filename: string): any => {
+        if (!file.isDirectory) {
+          console.log(
+            yellowBright(
+              "You have to be inside of a directory to perform this action"
+            )
+          );
+          return null;
         }
-        const path:string = join(file.path, filename)
-        const exists:boolean = checkFileExists(path, false)
-        if(exists){ 
-          console.log(redBright(`${filename} already exists`))
-          return null
+        const path: string = join(file.path, filename);
+        const exists: boolean = checkFileExists(path, false);
+        if (exists) {
+          console.log(redBright(`${filename} already exists`));
+          return null;
         }
-        writeFile(path, " ", (error:NodeJS.ErrnoException | null):null | void => {
-          if(error) { 
-            new CommandLineException({
-              message: error.toString(),
-            }, false)
-            return null
+        writeFile(
+          path,
+          " ",
+          (error: NodeJS.ErrnoException | null): null | void => {
+            if (error) {
+              new CommandLineException(
+                {
+                  message: error.toString(),
+                },
+                false
+              );
+              return null;
+            }
+            // console.clear()
+            // reloadFunction()
+            // console.log(yellowBright(`Succesfully created ${path}`))
           }
-          // console.clear()
-          // reloadFunction()
-          // console.log(yellowBright(`Succesfully created ${path}`))
-        })
-        console.clear()
-        reloadFunction()
-      }
-    })
-  }
+        );
+        console.clear();
+        reloadFunction();
+      },
+    });
+  };
 }

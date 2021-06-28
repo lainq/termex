@@ -1,8 +1,8 @@
-import {yellowBright} from 'chalk';
-import {readdirSync, statSync} from 'fs';
-import {join} from 'path';
-import {Ignores} from './ignore';
-import {checkFileExists, File} from './utils';
+import { yellowBright } from "chalk";
+import { readdirSync, statSync } from "fs";
+import { join } from "path";
+import { Ignores } from "./ignore";
+import { checkFileExists, File } from "./utils";
 
 export class Walk {
   public files: Array<string> = new Array<string>();
@@ -16,14 +16,14 @@ export class Walk {
    */
   constructor(path: string, parameters: Array<string>) {
     this.path = path;
-    this.ignores = parameters.includes('ignore')
+    this.ignores = parameters.includes("ignore")
       ? new Ignores().ignoreFiles({
           path: this.path,
           exists: true,
           isDirectory: checkFileExists(this.path, true),
         })
       : new Array<File>();
-    console.log(yellowBright('Scanning...'));
+    console.log(yellowBright("Scanning..."));
     this.walk(this.path);
   }
 
@@ -45,7 +45,7 @@ export class Walk {
         this.files.push(currentFile);
         continue;
       }
-      if (content[contentIndex] == '.git') {
+      if (content[contentIndex] == ".git") {
         continue;
       }
       this.walk(currentFile);

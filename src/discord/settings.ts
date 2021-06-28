@@ -13,10 +13,10 @@ export class RichPresenceSettings {
   /**
    * @public
    * @static
-   * 
+   *
    * Read the settings file and get the client
    * id stored in it
-   * 
+   *
    * @returns {string | null} The client id
    */
   public static getClientId = (): string | null => {
