@@ -45,7 +45,8 @@ export class TermexDiscordRPC {
       // smallImageKey: 'snek_small',
       // smallImageText: 'i am my own pillows',
       instance: false,
-    });
+    }).catch((reason:any):void => {
+    })
   };
 
   /**
@@ -65,7 +66,6 @@ export class TermexDiscordRPC {
     filename: string
     // timeout: number = 15e3
   ): void => {
-    console.log("going to set");
     this.setActivity(filename);
   };
 }
