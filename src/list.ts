@@ -264,6 +264,16 @@ export class ListFiles {
             this.create();
           },
         ],
+        [
+          "ctrl+n", 
+          () => {
+            if(!this.path.isDirectory) {
+              console.log(yellowBright("You have to be inside of a directory to perform this action"))
+              return null
+            }
+            KeyboardEvents.createFile(this.path, this.create)
+          }
+        ]
       ])
     );
     this.addedEventListener = true;
