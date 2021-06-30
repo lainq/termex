@@ -26,6 +26,7 @@
     "chalk": "^4.1.1",
     "cli-highlight": "^2.1.11",
     "console-png": "^1.2.1",
+    "discord-rpc": "^4.0.1",
     "figlet": "^1.5.0",
     "isbinaryfile": "^4.0.8",
     "marked": "^2.1.1",
@@ -33,8 +34,7 @@
     "mime-types": "^2.1.31",
     "open": "^8.2.0",
     "table": "^6.7.1",
-    "typescript": "^4.3.4",
-    "discord-rpc": "^4.0.1"
+    "typescript": "^4.3.4"
   },
   "devDependencies": {
     "@types/discord-rpc": "^3.0.5",

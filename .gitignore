@@ -10,6 +10,9 @@ __pycache__/
 node_modules/
 bookmarks/
 
+executables/
+termex.exe
+
 # C extensions
 *.so
 
