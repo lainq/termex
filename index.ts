@@ -13,6 +13,8 @@ import { RichPresenceSettings } from "./src/discord/settings";
 import { openLast } from "./src/last";
 import { initializeTermex } from "./src/init";
 import { DirectoryFiles } from "./src/files";
+import open = require("open");
+
 
 const createTitle = (titleString: string = "Termex"): void => {
   text(
@@ -42,7 +44,7 @@ const performCommand = (result: ArgumentParserResults): Function => {
   }
   if (command == "help") {
     return (): void => {
-      console.log("Showing help");
+      open("https://github.com/pranavbaburaj/termex/tree/main/docs")
     };
   } else if (command == "history") {
     return displayHistory;

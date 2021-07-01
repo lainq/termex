@@ -61,14 +61,15 @@ Build the project
 # Install typescript to compile the source
 npm i typescript -D
 
-# Compile the source into dist directory
-tsc index.ts --esModuleInterop true --allowJs true --outDir ./dist
-
 # Install node-gyp(Required by discord-rpc) and pkg(to package the application)
 npm install node-gyp pkg 
 
 # Install all the other dependencies
 npm install
+
+# Compile the source into dist directory
+tsc index.ts --esModuleInterop true --allowJs true --outDir ./dist
+
 
 # Build the application into an executable
 pkg -c package.json ./dist/index.js
