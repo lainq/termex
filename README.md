@@ -17,12 +17,12 @@
     <img src="https://img.shields.io/discord/808537055177080892.svg">
     <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">   
   </p>
-
+FJ;
   <br />
 
 </p>
 
-<img src="./assets/vid.gif" height="300">
+<img src="https://images-ext-1.discordapp.net/external/yHZl7YciYueiLCGiieiGcVMLjETEXBFFVdauFU4Gmrg/%3Ftoken%3DAQ34QMO5UFN2JQTSEICGU7DA3V2QQ/https/raw.githubusercontent.com/pranavbaburaj/termex/main/assets/vid.gif" height="300">
 
 # About
 
@@ -36,9 +36,12 @@ Termex(**Ter**minal **Ex**plorer) is a terminal-based file explorer created usin
 
 Windows users can download the zip file from the [releases](https://github.com/pranavbaburaj/termex/releases/latest/). Unzip the downloaded file and you can find the termex executable in the directory. An alternate wa is to build from source. You can learn more about it [here](https://github.com/pranavbaburaj/termex#building-from-source)
 
+- **Other platforms**
+Non-Windows users require to build the application from source.Revd more \
+
 ## Building from source
 
-Inorder to build the repository from your local system 💻, you will need to have the following programs installed:
+Inorder to build the repository from your loal system 💻, you will need to have the following programs installed:
 
 - Node JS
 - NPM
@@ -46,11 +49,32 @@ Inorder to build the repository from your local system 💻, you will need to ha
 
 Once you have installed all the required software, let's get started by cloning the repository.
 
-```sh
+```rb
 # Clone the repository into your local system
 git clone https://github.com/pranavbaburaj/termex.git
 
 # Get into the directory
 cd termex
 ```
-Open up the windows powershell in the termex directory and execute [`make.ps1`](https://github.com/pranavbaburaj/termex/blob/main/make.ps1).
+Build the project
+```rb
+# Install typescript to compile the source
+npm i typescript -D
+
+# Compile the source into dist directory
+tsc index.ts --esModuleInterop true --allowJs true --outDir ./dist
+
+# Install node-gyp(Required by discord-rpc) and pkg(to package the application)
+npm install node-gyp pkg 
+
+# Install all the other dependencies
+npm install
+
+# Build the application into an executable
+pkg -t node14-win -c package.json -o ./executable/termex.exe ./dist/index.js
+```
+
+<hr>
+
+Once you are done with the installation, add the executable into the `PATH` envrionment variable and start using termex.
+
