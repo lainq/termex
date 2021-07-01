@@ -30,25 +30,27 @@ export class Walk {
   private walk = (path: string): void => {
     const content: Array<string> = readdirSync(path);
     for (let contentIndex = 0; contentIndex < content.length; contentIndex++) {
-      const currentFile: string = join(path, content[contentIndex]);
-      const isDirectory: boolean = statSync(currentFile).isDirectory();
-      const ignore: any = this.ignores.filter((ignoreFile: File): boolean => {
-        return (
-          ignoreFile.path == currentFile &&
-          ignoreFile.isDirectory == isDirectory
-        );
-      });
-      if (ignore.length > 0) {
-        continue;
-      }
-      if (!isDirectory) {
-        this.files.push(currentFile);
-        continue;
-      }
-      if (content[contentIndex] == ".git") {
-        continue;
-      }
-      this.walk(currentFile);
-    }
-  };
+      try {
+        const currentFile: string = join(path, content[contentIndex]);
+        const isDirectory: boolean = statSync(currentFile).isDirectory();
+        const ignore: any = this.ignores.filter((ignoreFile: File): boolean => {
+          return (
+            ignoreFile.path == currentFile &&
+            ignoreFile.isDirectory == isDirectory
+          );
+        });
+        if (ignore.length > 0) {
+          continue;
+        }
+        if (!isDirectory) {
+          this.files.push(currentFile);
+          continue;
+        }
+        if (content[contentIndex] == ".git") {
+          continue;
+        }
+        this.walk(currentFile);
+        } catch(exception) {continue}
+    };
+  }
 }
