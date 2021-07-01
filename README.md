@@ -22,7 +22,7 @@
 
 </p>
 
-<img src="https://github.com/pranavbaburaj/termex/blob/main/assets/vid.gif" height="300">
+<img src="./assets/vid.gif" height="300">
 
 # About
 
@@ -30,6 +30,11 @@ Termex(**Ter**minal **Ex**plorer) is a terminal-based file explorer created usin
 
 # Installation
 
+## Manual installation
+
+- **Windows**
+
+Windows users can download the zip file from the [releases](https://github.com/pranavbaburaj/termex/releases/latest/). Unzip the downloaded file and you can find the termex executable in the directory. An alternate wa is to build from source. You can learn more about it [here](https://github.com/pranavbaburaj/termex#building-from-source)
 
 ## Building from source
 
@@ -48,13 +53,4 @@ git clone https://github.com/pranavbaburaj/termex.git
 # Get into the directory
 cd termex
 ```
-
-> **NOTE**: Typescript is not added into the `package.json`, so make sure to install typescript inorder to compile the source. To install TypeScript, use:`npm install typescript`
-
-Install all the [dependencies](https://bundlephobia.com/scan-results?packages=@types/chalk@2.2.0,@types/node@15.12.2,boxen@5.0.1,chalk@4.1.1,cli-highlight@2.1.11,console-png@1.2.1,figlet@1.5.0,isbinaryfile@4.0.8,marked@2.1.1,marked-terminal@4.1.1,mime-types@2.1.31,open@8.2.0,table@6.7.1)
-
-```sh
-npm install
-```
-
-# Not complete
+Open up the windows powershell in the termex directory and execute [`make.ps1`](https://github.com/pranavbaburaj/termex/blob/main/make.ps1).
