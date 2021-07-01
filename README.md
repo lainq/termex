@@ -1,3 +1,4 @@
+
 <br />
 <p align="center">
   <img src="https://i.imgur.com/uP8MCw0.gif" height="120">
@@ -6,7 +7,7 @@
   <p align="center">
     Explore the filesystem from your terminal
   <br />
-<!--     <a href="https://github.com/pranavbaburaj/polyglot/blob/main/docs/README.md">📖 Documentation</a> -->
+    <a href="https://github.com/pranavbaburaj/termex/blob/main/docs/README.md">📖 Documentation</a>
     ·
     <a href="https://github.com/pranavbaburaj/termex/issues">Report a Bug</a>
     ·
@@ -17,7 +18,6 @@
     <img src="https://img.shields.io/discord/808537055177080892.svg">
     <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">   
   </p>
-FJ;
   <br />
 
 </p>
@@ -71,10 +71,15 @@ npm install node-gyp pkg
 npm install
 
 # Build the application into an executable
-pkg -t node14-win -c package.json -o ./executable/termex.exe ./dist/index.js
+pkg -c package.json ./dist/index.js
 ```
 
 <hr>
 
 Once you are done with the installation, add the executable into the `PATH` envrionment variable and start using termex.
+
+Please mind reading the documentation before using termex. Learn more about documentation [here](https://github.com/pranavbaburaj/termex#Documentation)
+
+# Documentation
+Read the official documentation [here](https://github.com/pranavbaburaj/termex/blob/main/docs/README.md). If you find any issues with the documentation, please let us know by creating an [issue](https://github.com/pranavbaburaj/termex/issues/new).
 
