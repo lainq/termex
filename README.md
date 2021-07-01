@@ -22,7 +22,7 @@ FJ;
 
 </p>
 
-<img src="https://images-ext-1.discordapp.net/external/yHZl7YciYueiLCGiieiGcVMLjETEXBFFVdauFU4Gmrg/%3Ftoken%3DAQ34QMO5UFN2JQTSEICGU7DA3V2QQ/https/raw.githubusercontent.com/pranavbaburaj/termex/main/assets/vid.gif" height="300">
+<img src="https://user-images.githubusercontent.com/70764593/124089457-89068e80-da71-11eb-9ddb-e51cf84a0369.gif" height="300">
 
 # About
 
