@@ -16,7 +16,7 @@
 
 `report` -> Report an issue with the cli
 
-[`rpc`](https://github.com/pranavbaburaj/termex/blob/main/docs/rpc.md) -> Check the discord rpc status
+[`rpc`](https://github.com/pranavbaburaj/termex/blob/main/docs/rpc.md) -> Check the discord rpc status. Click [here](https://github.com/pranavbaburaj/termex/blob/main/docs/rpc.md) to know more about discord-rpc
 
 `no-rpc` -> Disable discord-rpc
 

@@ -21,7 +21,9 @@
 
 </p>
 
-<img src="https://user-images.githubusercontent.com/70764593/124089457-89068e80-da71-11eb-9ddb-e51cf84a0369.gif" height="300">
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/70764593/124089457-89068e80-da71-11eb-9ddb-e51cf84a0369.gif" height="300">
+ </div>
 
 # About
 
