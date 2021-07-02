@@ -1,8 +1,8 @@
 {
   "name": "termex",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "start": "ts-node index.ts . --ignore",
     "lint": "npx prettier . -w",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/exploterm/terminal-file-explorer.git"
+    "url": "git+https://github.com/pranavbaburaj/termex.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/exploterm/terminal-file-explorer/issues"
+    "url": "https://github.com/pranavbaburaj/termex/issues"
   },
-  "homepage": "https://github.com/exploterm/terminal-file-explorer#readme",
+  "homepage": "https://github.com/pranavbaburaj/termex#readme",
   "dependencies": {
     "@types/chalk": "^2.2.0",
     "@types/node": "^15.12.2",
@@ -44,6 +44,10 @@
     "oral-ts": "^1.0.2",
     "ts-node": "^10.0.0"
   },
+  "files": [
+    "bin",
+    "dist"
+  ],
   "bin": {
     "termex": "./bin/termex"
   }

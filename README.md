@@ -27,20 +27,33 @@
 
 Termex(**Ter**minal **Ex**plorer) is a terminal-based file explorer created using typescript. The project was originally created for the [Tech With Tim codejam](https://twtcodejam.net).
 
+# Features
+
+- Terminal-based file navigation
+- View files with syntax highlighting
+- Discord RPC
+  and many other small features
+
 # Installation
 
 ## Manual installation
+
+- **NPM**
+
+```ps1
+$ npm i termex -g
+```
 
 - **Windows**
 
 Windows users can download the zip file from the [releases](https://github.com/pranavbaburaj/termex/releases/latest/). Unzip the downloaded file and you can find the termex executable in the directory. An alternate wa is to build from source. You can learn more about it [here](https://github.com/pranavbaburaj/termex#building-from-source)
 
 - **Other platforms**
-  Non-Windows users require to build the application from source.Revd more \
+  Non-Windows users require to build the application from source. Read more about it [here](https://github.com/pranavbaburaj/termex#building-from-source)
 
 ## Building from source
 
-Inorder to build the repository from your loal system 💻, you will need to have the following programs installed:
+Inorder to build the repository from your local system 💻, you will need to have the following programs installed:
 
 - Node JS
 - NPM
