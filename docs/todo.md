@@ -1,1 +1,0 @@
-# write discord-rpc documentation

@@ -15,7 +15,6 @@ import { initializeTermex } from "./src/init";
 import { DirectoryFiles } from "./src/files";
 import open = require("open");
 
-
 const createTitle = (titleString: string = "Termex"): void => {
   text(
     "Termex",
@@ -44,7 +43,7 @@ const performCommand = (result: ArgumentParserResults): Function => {
   }
   if (command == "help") {
     return (): void => {
-      open("https://github.com/pranavbaburaj/termex/tree/main/docs")
+      open("https://github.com/pranavbaburaj/termex/tree/main/docs");
     };
   } else if (command == "history") {
     return displayHistory;

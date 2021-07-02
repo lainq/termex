@@ -2,8 +2,10 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "allowJs": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "files": ["index.ts"],
-  "include": ["src"]
+  "include": ["src", "tests"]
 }

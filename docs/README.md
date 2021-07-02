@@ -8,23 +8,22 @@
 
 ## Commands
 
-`history`       -> Shows the user history
+`history` -> Shows the user history
 
 `clear-history` -> Clear the history
 
-`%` 			-> Categorize files based on mime-type and gets the percentage
+`%` -> Categorize files based on mime-type and gets the percentage
 
-`report` 		-> Report an issue with the cli
+`report` -> Report an issue with the cli
 
-`rpc` 			-> Check the discord rpc status
+`rpc` -> Check the discord rpc status
 
-`no-rpc` 		-> Disable discord-rpc
+`no-rpc` -> Disable discord-rpc
 
-`last`			-> Open the last opened file/
-
+`last` -> Open the last opened file/
 
 ## Key Bindings
-      
+
 <table style="width:100%">  
 <tr>  
 <th>Key</th>  
@@ -72,15 +71,17 @@
 </table>
 
 ## Actions
+
 To open up actions, press <kbd>Insert</kbd> in your keyboard
 
 <img src="https://i.imgur.com/2gdCljh.png">
 
 ### Available actions
+
 - `env`
-To find all the variables from `.env` files in the current directory.
+  To find all the variables from `.env` files in the current directory.
 - `find <stuff-to-find>`
-Find something in the current directory
-<img src="https://i.imgur.com/FoARHqY.gif">
+  Find something in the current directory
+  <img src="https://i.imgur.com/FoARHqY.gif">
 - `%`
- The percent commnd walks through the directory and categorizes files based on mime types. And display the percentage of different types of mime-types.
+  The percent commnd walks through the directory and categorizes files based on mime types. And display the percentage of different types of mime-types.
