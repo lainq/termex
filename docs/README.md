@@ -1,17 +1,26 @@
 # Documentation
 
-- [Commands](##Commands)
-- [Key Bindings](##KeyBindings)
-- [Actions](##Actions)
+- [Documentation](#documentation)
+  - [Commands](#commands)
+  - [Key Bindings](#key-bindings)
+  - [Actions](#actions)
+    - [Available actions](#available-actions)
 
 ## Commands
+
 `history`       -> Shows the user history
+
 `clear-history` -> Clear the history
+
 `%` 			-> Categorize files based on mime-type and gets the percentage
+
 `report` 		-> Report an issue with the cli
+
 `rpc` 			-> Check the discord rpc status
+
 `no-rpc` 		-> Disable discord-rpc
-`last`			-> Open the last opened file/directory
+
+`last`			-> Open the last opened file/
 
 
 ## Key Bindings
