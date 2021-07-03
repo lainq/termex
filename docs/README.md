@@ -85,3 +85,6 @@ To open up actions, press <kbd>Insert</kbd> in your keyboard
   <img src="https://i.imgur.com/FoARHqY.gif">
 - `%`
   The percent commnd walks through the directory and categorizes files based on mime types. And display the percentage of different types of mime-types.
+
+
+> Watch a 1 min video on the basic functionality [here](https://www.youtube.com/watch?v=bOVCeqXbTSM)
