@@ -100,7 +100,7 @@ export class ListFiles {
     this.currentFileIndex += incrementBy;
     if (
       this.currentFileIndex >= indexCountLimit ||
-      this.currentFileIndex == 0
+      this.currentFileIndex <= 0
     ) {
       this.currentFileIndex -= incrementBy;
       return null;
