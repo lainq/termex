@@ -1,37 +1,104 @@
-## Welcome to GitHub Pages
+<br />
+<p align="center">
+  <img src="https://i.imgur.com/uP8MCw0.gif" height="120">
+  <h3 align="center"><i><strong>Termex</strong></i></h3>
 
-You can use the [editor on GitHub](https://github.com/pranavbaburaj/termex/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+  <p align="center">
+    Explore the filesystem from your terminal
+  <br />
+    <a href="https://github.com/pranavbaburaj/termex/blob/main/docs/README.md">📖 Documentation</a>
+    ·
+    <a href="https://github.com/pranavbaburaj/termex/issues">Report a Bug</a>
+    ·
+    <a href="https://github.com/pranavbaburaj/termex/pulls">Request Feature</a>
+  </p>
+  <br>
+  <p align="center">
+    <img src="https://img.shields.io/discord/808537055177080892.svg">
+    <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">   
+  </p>
+  <br />
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+</p>
 
-### Markdown
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/70764593/124089457-89068e80-da71-11eb-9ddb-e51cf84a0369.gif" height="300">
+ </div>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+# About
 
-```markdown
-Syntax highlighted code block
+Termex(**Ter**minal **Ex**plorer) is a terminal-based file explorer created using typescript. The project was originally created for the [Tech With Tim codejam](https://twtcodejam.net).
 
-# Header 1
-## Header 2
-### Header 3
+# Features
 
-- Bulleted
-- List
+- Terminal-based file navigation
+- View files with syntax highlighting
+- Discord RPC
+  and many other small features
+  
+ Read the documentation [here](https://github.com/pranavbaburaj/termex/tree/main/docs)
 
-1. Numbered
-2. List
+# Installation
 
-**Bold** and _Italic_ and `Code` text
+## Manual installation
 
-[Link](url) and ![Image](src)
+- **NPM**
+
+```ps1
+$ npm i termex -g
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+<!-- - **Windows**
 
-### Jekyll Themes
+Windows users can download the zip file from the [releases](https://github.com/pranavbaburaj/termex/releases/latest/). Unzip the downloaded file and you can find the termex executable in the directory. An alternate wa is to build from source. You can learn more about it [here](https://github.com/pranavbaburaj/termex#building-from-source)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/pranavbaburaj/termex/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+- **Other platforms**
+  Non-Windows users require to build the application from source. Read more about it [here](https://github.com/pranavbaburaj/termex#building-from-source) -->
 
-### Support or Contact
+## Building from source
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Inorder to build the repository from your local system 💻, you will need to have the following programs installed:
+
+- Node JS
+- NPM
+- Git
+
+Once you have installed all the required software, let's get started by cloning the repository.
+
+```rb
+# Clone the repository into your local system
+git clone https://github.com/pranavbaburaj/termex.git
+
+# Get into the directory
+cd termex
+```
+
+Build the project
+
+```rb
+# Install typescript to compile the source
+npm i typescript -D
+
+# Install node-gyp(Required by discord-rpc) and pkg(to package the application)
+npm install node-gyp pkg
+
+# Install all the other dependencies
+npm install
+
+# Compile the source into dist directory
+tsc index.ts --esModuleInterop true --allowJs true --outDir ./dist
+
+
+# Build the application into an executable
+pkg -c package.json ./dist/index.js
+```
+
+<hr>
+
+Once you are done with the installation, add the executable into the `PATH` envrionment variable and start using termex.
+
+Please mind reading the documentation before using termex. Learn more about documentation [here](https://github.com/pranavbaburaj/termex#Documentation)
+
+# Documentation
+
+Read the official documentation [here](https://github.com/pranavbaburaj/termex/blob/main/docs/README.md). If you find any issues with the documentation, please let us know by creating an [issue](https://github.com/pranavbaburaj/termex/issues/new).
