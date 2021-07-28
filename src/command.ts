@@ -5,6 +5,7 @@ import { ContentPercent } from "./content";
 import { EnvironmentVariables } from "./env";
 import { CommandLineException } from "./exception";
 import { find } from "./find";
+import { GithubGists } from "./gists";
 import { Prompt } from "./prompt";
 import { File } from "./utils";
 
@@ -55,6 +56,12 @@ const commands: Map<string, Function> = new Map<string, Function>([
       const percent = new ContentPercent(parameters, file.path);
     },
   ],
+  [
+    "gist", 
+    (file:File, parameters:Array<string>):any => {
+      const gist:GithubGists = new GithubGists(file);
+    }
+  ]
 ]);
 
 interface ParseResults extends ArgumentParserResults {}
