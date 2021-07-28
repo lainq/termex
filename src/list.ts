@@ -34,7 +34,7 @@ export class ListFiles {
   private showTitle: boolean;
   private addedEventListener: boolean = false;
 
-  private currentFileIndex: number = 0;
+  private currentFileIndex: number = -1;
   private bookmarks: Bookmarks = new Bookmarks();
   private logIndex: number = 0;
 
@@ -100,7 +100,7 @@ export class ListFiles {
     this.currentFileIndex += incrementBy;
     if (
       this.currentFileIndex >= indexCountLimit ||
-      this.currentFileIndex <= 0
+      this.currentFileIndex <= -1
     ) {
       this.currentFileIndex -= incrementBy;
       return null;
@@ -283,9 +283,11 @@ export class ListFiles {
     this.addedEventListener = true;
   };
 
-  private switchPath = (file?: string): void | null => {
-    const filename: string =
-      file || join(cwd(), this.files[this.currentFileIndex]);
+  private switchPath = (file?: string): any => {
+    if(this.currentFileIndex < 0){return  }
+    const filename: string | undefined =
+      file || join(cwd(), this.files? this.files[this.currentFileIndex] : undefined);
+    if(!filename) {return}
     let selectedFile: File = {
       path: filename,
       exists: checkFileExists(filename, false),
@@ -302,7 +304,7 @@ export class ListFiles {
     console.clear();
     this.path = selectedFile;
     this.files = this.createFiles();
-    this.currentFileIndex = 0;
+    this.currentFileIndex = -1;
     this.create();
     if (isBinary) {
       console.log(yellowBright("Cannot open binary files"));
