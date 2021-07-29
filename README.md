@@ -15,7 +15,8 @@
   <br>
   <p align="center">
     <img src="https://img.shields.io/discord/808537055177080892.svg">
-    <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">   
+    <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
+    <img src="https://tokei.rs/b1/github/pranavbaburaj/termex">
   </p>
   <br />
 
