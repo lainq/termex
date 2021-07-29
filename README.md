@@ -27,7 +27,7 @@
 
 # About
 
-Termex(**Ter**minal **Ex**plorer) is a terminal-based file explorer created using typescript. The project was originally created for the [Tech With Tim codejam](https://twtcodejam.net).
+Termex(**Ter**minal **Ex**plorer) is a terminal-based file explorer created using typescript. 
 
 # Features
 
@@ -65,7 +65,7 @@ Inorder to build the repository from your local system 💻, you will need to ha
 
 Once you have installed all the required software, let's get started by cloning the repository.
 
-```rb
+```ps1
 # Clone the repository into your local system
 git clone https://github.com/pranavbaburaj/termex.git
 
@@ -75,7 +75,7 @@ cd termex
 
 Build the project
 
-```rb
+```ps1
 # Install typescript to compile the source
 npm i typescript -D
 
