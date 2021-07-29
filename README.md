@@ -28,7 +28,7 @@
 
 # About
 
-Termex(**Ter**minal **Ex**plorer) is a terminal-based file explorer created using typescript. 
+Termex(**Ter**minal **Ex**plorer) is a terminal-based file explorer created using typescript.
 
 # Features
 
@@ -36,8 +36,8 @@ Termex(**Ter**minal **Ex**plorer) is a terminal-based file explorer created usin
 - View files with syntax highlighting
 - Discord RPC
   and many other small features
-  
- Read the documentation [here](https://github.com/pranavbaburaj/termex/tree/main/docs)
+
+Read the documentation [here](https://github.com/pranavbaburaj/termex/tree/main/docs)
 
 # Installation
 

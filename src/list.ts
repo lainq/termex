@@ -284,10 +284,15 @@ export class ListFiles {
   };
 
   private switchPath = (file?: string): any => {
-    if(this.currentFileIndex < 0){return  }
+    if (this.currentFileIndex < 0) {
+      return;
+    }
     const filename: string | undefined =
-      file || join(cwd(), this.files? this.files[this.currentFileIndex] : undefined);
-    if(!filename) {return}
+      file ||
+      join(cwd(), this.files ? this.files[this.currentFileIndex] : undefined);
+    if (!filename) {
+      return;
+    }
     let selectedFile: File = {
       path: filename,
       exists: checkFileExists(filename, false),

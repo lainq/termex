@@ -6,7 +6,7 @@ import {
   yellowBright,
   cyan,
   yellow,
-  green
+  green,
 } from "chalk";
 import { readFileSync, writeFileSync } from "fs";
 import { homedir } from "os";
@@ -72,16 +72,20 @@ export const displayHistory = (): void => {
   ];
   for (let index = 0; index < data.length; index++) {
     const currentObject: HistoryObject = data[index];
-    const currentFileName = currentObject.filename
+    const currentFileName = currentObject.filename;
     tableData.push([
-      cyan(currentFileName.length >= 30
-              ? currentFileName.slice(0, 30 - currentFileName.length - 3) + ".."
-              : currentFileName),
+      cyan(
+        currentFileName.length >= 30
+          ? currentFileName.slice(0, 30 - currentFileName.length - 3) + ".."
+          : currentFileName
+      ),
       magenta(currentObject.isDirectory ? "dir" : "file"),
-      yellow(checkFileExists(
-              currentObject.filename,
-              currentObject.isDirectory
-            ).toString()),
+      yellow(
+        checkFileExists(
+          currentObject.filename,
+          currentObject.isDirectory
+        ).toString()
+      ),
       green(currentObject.time.toString().split(" ").slice(0, 4).join(" ")),
     ]);
   }

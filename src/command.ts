@@ -54,7 +54,7 @@ const commands: Map<string, Function> = new Map<string, Function>([
       }
       const percent = new ContentPercent(parameters, file.path);
     },
-  ]
+  ],
 ]);
 
 interface ParseResults extends ArgumentParserResults {}
