@@ -1,7 +1,7 @@
 {
   "name": "termex",
-  "version": "1.0.3",
-  "description": "",
+  "version": "1.0.4",
+  "description": "Explore the file system from your terminal",
   "main": "./dist/index.js",
   "scripts": {
     "start": "ts-node index.ts . --ignore",
@@ -12,7 +12,14 @@
     "type": "git",
     "url": "git+https://github.com/pranavbaburaj/termex.git"
   },
-  "keywords": [],
+  "keywords": [
+    "cli",
+    "fs",
+    "terminal",
+    "explorer",
+    "file-explorer",
+    "tui"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
