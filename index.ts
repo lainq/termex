@@ -14,6 +14,7 @@ import { openLast } from "./src/last";
 import { initializeTermex } from "./src/init";
 import { DirectoryFiles } from "./src/files";
 import open = require("open");
+import { DropboxFiles } from "./src/dropbox/dropbox";
 
 const createTitle = (titleString: string = "Termex"): void => {
   text(
@@ -86,6 +87,10 @@ const performCommand = (result: ArgumentParserResults): Function => {
     return () => {
       const files = new DirectoryFiles(process.cwd(), result.parameters);
     };
+  } else if(command == "dropbox") {
+    return () => {
+      const dropbox = new DropboxFiles(result.parameters)
+    }
   }
   return (): void => {
     initializeTermex(command, result.parameters);
