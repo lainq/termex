@@ -87,10 +87,10 @@ const performCommand = (result: ArgumentParserResults): Function => {
     return () => {
       const files = new DirectoryFiles(process.cwd(), result.parameters);
     };
-  } else if(command == "gists") {
+  } else if (command == "gists") {
     return () => {
-      const gist = new GithubGist(result.parameters)
-    }
+      const gist = new GithubGist(result.parameters);
+    };
   }
   return (): void => {
     initializeTermex(command, result.parameters);
