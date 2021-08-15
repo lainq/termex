@@ -14,7 +14,7 @@ import { openLast } from "./src/last";
 import { initializeTermex } from "./src/init";
 import { DirectoryFiles } from "./src/files";
 import open = require("open");
-import { DropboxFiles } from "./src/dropbox/dropbox";
+import { GithubGist } from "./src/gists/gists";
 
 const createTitle = (titleString: string = "Termex"): void => {
   text(
@@ -87,9 +87,9 @@ const performCommand = (result: ArgumentParserResults): Function => {
     return () => {
       const files = new DirectoryFiles(process.cwd(), result.parameters);
     };
-  } else if(command == "dropbox") {
+  } else if(command == "gists") {
     return () => {
-      const dropbox = new DropboxFiles(result.parameters)
+      const gist = new GithubGist(result.parameters)
     }
   }
   return (): void => {

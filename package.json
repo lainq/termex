@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/pranavbaburaj/termex#readme",
   "dependencies": {
+    "@octokit/core": "^3.5.1",
     "@types/chalk": "^2.2.0",
     "@types/inquirer": "^7.3.3",
     "@types/node": "^15.12.2",
@@ -28,8 +29,8 @@
     "cli-highlight": "^2.1.11",
     "console-png": "^1.2.1",
     "discord-rpc": "^4.0.1",
-    "dropbox": "^10.5.0",
     "figlet": "^1.5.0",
+    "googleapis": "^39.2.0",
     "inquirer": "^8.1.2",
     "isbinaryfile": "^4.0.8",
     "marked": "^2.1.1",
