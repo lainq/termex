@@ -173,12 +173,12 @@ export class ListFiles {
         const size: number = fileStats.size;
         const modifiedTime: Date = fileStats.mtime;
 
+        const name: string =
+          currentFileName.length >= 30
+            ? currentFileName.slice(0, 30 - currentFileName.length - 3) + ".."
+            : currentFileName;
         tableData.push([
-          cyan(
-            currentFileName.length >= 30
-              ? currentFileName.slice(0, 30 - currentFileName.length - 3) + ".."
-              : currentFileName
-          ),
+          name.startsWith(".") && name != ".." ? cyan(name) : cyanBright(name),
           magenta(fileType),
           green(extension),
           yellow(`${size} bytes`),
