@@ -12,7 +12,7 @@ export class GithubGist {
   private token: string;
   private fileIndex: number = -1;
   private addedInputs: boolean = false;
-  private logged:boolean = false
+  private logged: boolean = false;
 
   constructor(parameters: Array<string>) {
     this.github = new Github();
@@ -38,21 +38,21 @@ export class GithubGist {
 
   private incrementFileIndex = (by: number, limit: Array<any>): void => {
     this.fileIndex += by;
-    if(!limit[this.fileIndex]){
-      this.fileIndex -= 1
-      return
+    if (!limit[this.fileIndex]) {
+      this.fileIndex -= 1;
+      return;
     }
-    if(!this.logged){
-      console.log("\n")
-      clearPreviousLine()
+    if (!this.logged) {
+      console.log("\n");
+      clearPreviousLine();
     }
-    clearPreviousLine()
+    clearPreviousLine();
     console.log(yellowBright(`Selected ${limit[this.fileIndex]}`));
-    this.logged = true
+    this.logged = true;
   };
 
   private displayGists = (client: Octokit): void => {
-    console.log("Fetching gists....")
+    console.log("Fetching gists....");
     const data = this.client.request("GET /gists");
     data
       .then((response: any): void => {
@@ -60,7 +60,7 @@ export class GithubGist {
         const gists: Array<any> = Array.from(data).map((element: any): any => {
           return element.id;
         });
-        clearPreviousLine()
+        clearPreviousLine();
         gists.forEach((element: any, index: number): void => {
           client
             .request("GET /gists/{gist_id}", { gist_id: element })
@@ -80,21 +80,23 @@ export class GithubGist {
       });
   };
 
-  private selectFile = (gists:Array<any>):void => {
-    const selectedGist:string = gists[this.fileIndex]
-    this.client.request("GET /gists/{gist_id}", { gist_id: selectedGist }).then((response:any):void => {
-      const files:any = response.data.files
-      const filenames:Array<string> = Object.keys(files)
-      for(let index=0; index<filenames.length; index++){
-        const file = files[filenames[index]]
-        console.log(yellowBright(file.filename))
-        console.log(boxen(highlight(file.content), {padding:1}))
-      }
-
-    }).catch((error:any):void => {
-      console.log(redBright(error))
-    })
-  }
+  private selectFile = (gists: Array<any>): void => {
+    const selectedGist: string = gists[this.fileIndex];
+    this.client
+      .request("GET /gists/{gist_id}", { gist_id: selectedGist })
+      .then((response: any): void => {
+        const files: any = response.data.files;
+        const filenames: Array<string> = Object.keys(files);
+        for (let index = 0; index < filenames.length; index++) {
+          const file = files[filenames[index]];
+          console.log(yellowBright(file.filename));
+          console.log(boxen(highlight(file.content), { padding: 1 }));
+        }
+      })
+      .catch((error: any): void => {
+        console.log(redBright(error));
+      });
+  };
 
   private addKeys = (gists: Array<any>): void => {
     if (this.addedInputs) {
@@ -115,13 +117,17 @@ export class GithubGist {
           },
         ],
         [
-          'ctrl+c', 
-          () => {process.exit()}
+          "ctrl+c",
+          () => {
+            process.exit();
+          },
         ],
         [
-          'return',
-          () => {this.selectFile(gists)}
-        ]
+          "return",
+          () => {
+            this.selectFile(gists);
+          },
+        ],
       ])
     );
     this.addedInputs = true;
