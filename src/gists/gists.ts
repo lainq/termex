@@ -2,6 +2,7 @@ import { Github } from "./gh";
 import { Octokit } from "@octokit/core";
 import { blueBright, greenBright, redBright, yellowBright } from "chalk";
 import { InputMode } from "../input";
+import { clearPreviousLine } from "../utils";
 
 export class GithubGist {
   private client: Octokit;
@@ -9,6 +10,7 @@ export class GithubGist {
   private token: string;
   private fileIndex: number = -1;
   private addedInputs: boolean = false;
+  private logged:boolean = false
 
   constructor(parameters: Array<string>) {
     this.github = new Github();
@@ -33,14 +35,21 @@ export class GithubGist {
   }
 
   private incrementFileIndex = (by: number, limit: Array<any>): void => {
-    if (this.fileIndex == -1 || this.fileIndex == limit.length - 1) {
-      return;
-    }
     this.fileIndex += by;
+    if(!limit[this.fileIndex]){
+      this.fileIndex -= 1
+      return
+    }
+    if(!this.logged){
+      console.log("\n\n\n")
+      clearPreviousLine()
+    }
     console.log(yellowBright(`Selected ${limit[this.fileIndex]}`));
+    this.logged = true
   };
 
   private displayGists = (client: Octokit): void => {
+    console.log("Fetching gists....")
     const data = this.client.request("GET /gists");
     data
       .then((response: any): void => {
@@ -48,6 +57,7 @@ export class GithubGist {
         const gists: Array<any> = Array.from(data).map((element: any): any => {
           return element.id;
         });
+        clearPreviousLine()
         gists.forEach((element: any, index: number): void => {
           client
             .request("GET /gists/{gist_id}", { gist_id: element })
@@ -76,15 +86,19 @@ export class GithubGist {
         [
           "up",
           () => {
-            this.incrementFileIndex(1, gists);
+            this.incrementFileIndex(-1, gists);
           },
         ],
         [
           "down",
           () => {
-            this.incrementFileIndex(-1, gists);
+            this.incrementFileIndex(1, gists);
           },
         ],
+        [
+          'ctrl+c', 
+          () => {process.exit()}
+        ]
       ])
     );
     this.addedInputs = true;
