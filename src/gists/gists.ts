@@ -24,9 +24,9 @@ export class GithubGist {
     if (command == "reset") {
       this.github.reset();
       process.exit();
-    } else if(command == "new"){
-      new CreateGist(this.client)
-    }else {
+    } else if (command == "new") {
+      new CreateGist(this.client);
+    } else {
       this.github
         .authenticate(this.client)
         .then((value: any): void => {

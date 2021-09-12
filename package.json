@@ -7,7 +7,7 @@
     "start": "ts-node index.ts . --ignore",
     "lint": "npx prettier . -w",
     "build": "tsc index.ts --esModuleInterop true --allowJs true --outDir ./dist",
-    "build-exe" : "pkg ./dist/index.js"
+    "build-exe": "pkg ./dist/index.js"
   },
   "repository": {
     "type": "git",
