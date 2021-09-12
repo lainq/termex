@@ -5,6 +5,7 @@ import { InputMode } from "../input";
 import { clearPreviousLine } from "../utils";
 import boxen from "boxen";
 import highlight from "cli-highlight";
+import { CreateGist } from "./create";
 
 export class GithubGist {
   private client: Octokit;
@@ -23,7 +24,9 @@ export class GithubGist {
     if (command == "reset") {
       this.github.reset();
       process.exit();
-    } else {
+    } else if(command == "new"){
+      new CreateGist(this.client)
+    }else {
       this.github
         .authenticate(this.client)
         .then((value: any): void => {
