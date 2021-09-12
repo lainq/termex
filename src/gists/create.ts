@@ -9,6 +9,10 @@ import { clearPreviousLine } from '../utils';
 export class CreateGist {
     private client:Octokit
 
+    /**
+     * @constructor
+     * @param {Octokit} client The client object
+     */
     constructor(client:Octokit) {
         this.client = client;
         this.collectFiles()

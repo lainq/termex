@@ -11,8 +11,11 @@ node_modules/
 bookmarks/
 
 executables/
-termex.exe
 
+
+index-linux
+index-macos
+*.zip
 # C extensions
 *.so
 

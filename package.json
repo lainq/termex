@@ -1,12 +1,13 @@
 {
   "name": "termex",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Explore the file system from your terminal",
   "main": "./dist/index.js",
   "scripts": {
     "start": "ts-node index.ts . --ignore",
     "lint": "npx prettier . -w",
-    "build": "tsc index.ts --esModuleInterop true --allowJs true --outDir ./dist"
+    "build": "tsc index.ts --esModuleInterop true --allowJs true --outDir ./dist",
+    "build-exe" : "pkg ./dist/index.js"
   },
   "repository": {
     "type": "git",
