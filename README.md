@@ -41,13 +41,13 @@ Read the documentation [here](https://github.com/pranavbaburaj/termex/tree/main/
 # Installation
 
 ## Manual installation
-<!-- 
+
 - **NPM**
 
 ```ps1
 $ npm i termex -g
 ```
- -->
+
 <!-- - **Windows**
 
 Windows users can download the zip file from the [releases](https://github.com/pranavbaburaj/termex/releases/latest/). Unzip the downloaded file and you can find the termex executable in the directory. An alternate wa is to build from source. You can learn more about it [here](https://github.com/pranavbaburaj/termex#building-from-source)
