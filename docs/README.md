@@ -22,6 +22,8 @@
 
 `last` -> Open the last opened file/
 
+`gists`(**beta**) -> Browse your github gists
+
 ## Key Bindings
 
 <table style="width:100%">  
