@@ -50,9 +50,7 @@ export class Walk {
           continue;
         }
         this.walk(currentFile);
-      } catch (exception) {
-
-      }
+      } catch (exception) {}
     }
   };
 }

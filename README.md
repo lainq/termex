@@ -41,7 +41,8 @@ Read the documentation [here](https://github.com/pranavbaburaj/termex/tree/main/
 # Installation
 
 ## Manual installation
-<!-- 
+
+<!--
 - **NPM**
 
 ```ps1

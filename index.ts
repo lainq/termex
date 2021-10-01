@@ -16,7 +16,7 @@ import { DirectoryFiles } from "./src/files";
 import open = require("open");
 import { GithubGist } from "./src/gists/gists";
 
-export const VERSION = "1.0.7"
+export const VERSION = "1.0.7";
 
 const createTitle = (titleString: string = "Termex"): void => {
   text(

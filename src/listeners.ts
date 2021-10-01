@@ -1,12 +1,6 @@
 import boxen from "boxen";
 import { greenBright, redBright, yellowBright } from "chalk";
-import {
-  mkdir,
-  readdirSync,
-  readFile,
-  statSync,
-  writeFile
-} from "fs";
+import { mkdir, readdirSync, readFile, statSync, writeFile } from "fs";
 import marked from "marked";
 import TerminalRenderer from "marked-terminal";
 import { join } from "path";

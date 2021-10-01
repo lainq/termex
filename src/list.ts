@@ -183,9 +183,7 @@ export class ListFiles {
           yellow(`${size} bytes`),
           green(modifiedTime.toString().split(" ").slice(0, 4).join(" ")),
         ]);
-      } catch (exception: any) {
-
-      }
+      } catch (exception: any) {}
     }
     const tableString = table(tableData);
     console.log(tableString);

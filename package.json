@@ -38,6 +38,7 @@
     "cli-highlight": "^2.1.11",
     "console-png": "^1.2.1",
     "discord-rpc": "^4.0.1",
+    "extract-zip": "^2.0.1",
     "figlet": "^1.5.0",
     "googleapis": "^39.2.0",
     "inquirer": "^8.1.2",

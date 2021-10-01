@@ -2,7 +2,7 @@ import { yellowBright } from "chalk";
 import { homedir } from "os";
 import { HistoryObject, TermexHistory } from "./history";
 import { initializeTermex } from "./init";
-import { checkFileExists} from "./utils";
+import { checkFileExists } from "./utils";
 
 export const openLast = () => {
   const history: Array<HistoryObject> = TermexHistory.readFromHistory().map(
