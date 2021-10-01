@@ -1,5 +1,5 @@
 import boxen from "boxen";
-import { Chalk, cyan, yellowBright } from "chalk";
+import { cyan, yellowBright } from "chalk";
 import { readdirSync, Stats, statSync } from "fs";
 import { basename } from "path";
 import { checkFileExists, File } from "./utils";

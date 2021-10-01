@@ -17,9 +17,9 @@ interface PromptOptions {
 export class Prompt {
   private readonly promptQuery: string;
   private readonly queryCharacter: string;
-  private callback?: Function;
-  private options?: Array<string>;
-  private exit?: boolean;
+  private readonly callback?: Function;
+  private readonly options?: Array<string>;
+  private readonly exit?: boolean;
 
   // The readline interface used to read data
   // from the command line

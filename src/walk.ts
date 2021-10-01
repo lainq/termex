@@ -51,7 +51,7 @@ export class Walk {
         }
         this.walk(currentFile);
       } catch (exception) {
-        continue;
+
       }
     }
   };

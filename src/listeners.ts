@@ -5,8 +5,7 @@ import {
   readdirSync,
   readFile,
   statSync,
-  writeFile,
-  writeFileSync,
+  writeFile
 } from "fs";
 import marked from "marked";
 import TerminalRenderer from "marked-terminal";

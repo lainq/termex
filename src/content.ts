@@ -4,7 +4,6 @@ import { isBinaryFileSync } from "isbinaryfile";
 import { lookup } from "mime-types";
 import { cwd } from "process";
 import { table } from "table";
-import { File } from "./utils";
 import { Walk } from "./walk";
 
 interface Count {

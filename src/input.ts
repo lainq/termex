@@ -18,7 +18,7 @@ export class InputMode {
       stdin.setRawMode(true);
     }
 
-    const parsedEvents = this.parseEvents(listeners);
+    this.parseEvents(listeners);
   }
 
   /**

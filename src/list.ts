@@ -21,7 +21,6 @@ import { Bookmarks } from "./bookmarks";
 import { Properties } from "./properties";
 import { command } from "./command";
 import { Ignores } from "./ignore";
-import { displayImage } from "./image";
 import open = require("open");
 import { TermexHistory } from "./history";
 import { isBinaryFileSync } from "isbinaryfile";
@@ -185,7 +184,7 @@ export class ListFiles {
           green(modifiedTime.toString().split(" ").slice(0, 4).join(" ")),
         ]);
       } catch (exception: any) {
-        continue;
+
       }
     }
     const tableString = table(tableData);
