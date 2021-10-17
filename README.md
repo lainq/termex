@@ -62,9 +62,10 @@ Windows users can download the zip file from the [releases](https://github.com/p
 
 Inorder to build the repository from your local system 💻, you will need to have the following programs installed:
 
-- Node JS
-- NPM
-- Git
+- [Node JS](https://nodejs.org/)
+- [NPM](https://npmjs.com/)
+- [Git](https://git-scm.com/)
+
 
 Once you have installed all the required software, let's get started by cloning the repository.
 
