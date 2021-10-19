@@ -31,10 +31,13 @@ Termex(**Ter**minal **Ex**plorer) is a terminal-based file explorer created usin
 
 # Features
 
-- Terminal-based file navigation
-- View files with syntax highlighting
-- Discord RPC
+- [x] Terminal-based file navigation
+- [x] View files with syntax highlighting
+- [x] Discord RPC
   and many other small features
+  
+  #### WIP
+  - [ ] Github Gists
 
 Read the documentation [here](https://github.com/pranavbaburaj/termex/tree/main/docs)
 
