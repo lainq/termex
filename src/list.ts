@@ -277,14 +277,15 @@ export class ListFiles {
           },
         ],
         [
-          'ctrl+up',
+          "ctrl+up",
           () => {
-            if(!this.path.isDirectory) return;
-            const currentFile:string | undefined = this.files[this.currentFileIndex]
-            if(!currentFile) return;
-            previewFiles(join(this.path.path, currentFile))
-          }
-        ]
+            if (!this.path.isDirectory) return;
+            const currentFile: string | undefined =
+              this.files[this.currentFileIndex];
+            if (!currentFile) return;
+            previewFiles(join(this.path.path, currentFile));
+          },
+        ],
       ])
     );
     this.addedEventListener = true;

@@ -34,9 +34,10 @@ Termex(**Ter**minal **Ex**plorer) is a terminal-based file explorer created usin
 - [x] Terminal-based file navigation
 - [x] View files with syntax highlighting
 - [x] Discord RPC
-  and many other small features
-  
+      and many other small features
+
   #### WIP
+
   - [ ] Github Gists
 
 Read the documentation [here](https://github.com/pranavbaburaj/termex/tree/main/docs)
@@ -45,9 +46,10 @@ Read the documentation [here](https://github.com/pranavbaburaj/termex/tree/main/
 
 ## Manual installation
 
-<!--
-=======
->>>>>>> 2998139b1abfe027ea417869b0687238ea1444b4
+# <!--
+
+> > > > > > > 2998139b1abfe027ea417869b0687238ea1444b4
+
 - **NPM**
 
 ```ps1
@@ -68,7 +70,6 @@ Inorder to build the repository from your local system 💻, you will need to ha
 - [Node JS](https://nodejs.org/)
 - [NPM](https://npmjs.com/)
 - [Git](https://git-scm.com/)
-
 
 Once you have installed all the required software, let's get started by cloning the repository.
 
