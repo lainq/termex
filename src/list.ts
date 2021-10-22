@@ -25,6 +25,7 @@ import open = require("open");
 import { TermexHistory } from "./history";
 import { isBinaryFileSync } from "isbinaryfile";
 import { TermexDiscordRPC } from "./discord/rpc";
+import { previewFiles } from "./preview";
 
 export class ListFiles {
   private path: File;
@@ -275,6 +276,15 @@ export class ListFiles {
             KeyboardEvents.createFile(this.path, this.create);
           },
         ],
+        [
+          'ctrl+up',
+          () => {
+            if(!this.path.isDirectory) return;
+            const currentFile:string | undefined = this.files[this.currentFileIndex]
+            if(!currentFile) return;
+            previewFiles(join(this.path.path, currentFile))
+          }
+        ]
       ])
     );
     this.addedEventListener = true;
