@@ -2,6 +2,20 @@ import boxen from "boxen";
 import { greenBright } from "chalk";
 import { Stats, statSync } from "fs";
 import { basename } from "path";
+import sizeOf  from 'image-size'
+import { ISizeCalculationResult } from "image-size/dist/types/interface";
+
+class ImagePreview {
+  private readonly filename:string;
+
+  constructor(filename:string){
+    this.filename = filename;
+  }
+
+  private getImageSize():ISizeCalculationResult {
+    return sizeOf(this.filename)
+  }
+}
 
 /**
  * Show preview for normal files(files which are not images)

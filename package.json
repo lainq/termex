@@ -30,6 +30,7 @@
   "dependencies": {
     "@octokit/core": "^3.5.1",
     "@types/chalk": "^2.2.0",
+    "@types/get-image-colors": "^4.0.1",
     "@types/inquirer": "^7.3.3",
     "@types/node": "^15.12.2",
     "axios": "^0.22.0",
@@ -40,7 +41,9 @@
     "discord-rpc": "^4.0.1",
     "extract-zip": "^2.0.1",
     "figlet": "^1.5.0",
+    "get-image-colors": "^4.0.0",
     "googleapis": "^39.2.0",
+    "image-size": "^1.0.0",
     "inquirer": "^8.1.2",
     "isbinaryfile": "^4.0.8",
     "marked": "^2.1.1",
