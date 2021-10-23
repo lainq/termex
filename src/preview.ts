@@ -1,21 +1,8 @@
 import boxen from "boxen";
-import { greenBright } from "chalk";
-import { Stats, statSync } from "fs";
+import { greenBright, redBright, rgb } from "chalk";
+import { readFileSync, Stats, statSync } from "fs";
 import { basename } from "path";
-import sizeOf  from 'image-size'
-import { ISizeCalculationResult } from "image-size/dist/types/interface";
-
-class ImagePreview {
-  private readonly filename:string;
-
-  constructor(filename:string){
-    this.filename = filename;
-  }
-
-  private getImageSize():ISizeCalculationResult {
-    return sizeOf(this.filename)
-  }
-}
+const terminalImage = require("terminal-image");
 
 /**
  * Show preview for normal files(files which are not images)
@@ -51,7 +38,7 @@ const showFilePreview = (
 };
 
 const isImage = (filename: string): boolean => {
-  const extensions: Array<string> = [".png", ".jpg", ".gif", ".jpeg"];
+  const extensions: Array<string> = [".png", ".jpg", ".jpeg"];
   const results: Array<boolean> = extensions.map((value: string): boolean => {
     return filename.endsWith(value);
   });
@@ -63,14 +50,14 @@ const isImage = (filename: string): boolean => {
  * @param {string} filename The name of the file
  * @returns
  */
-export const previewFiles = (filename: string): void => {
+export const previewFiles = async (filename: string): Promise<void> => {
   const stats: Stats = statSync(filename);
   if (stats.isDirectory()) {
     showFilePreview(filename, stats);
     return;
   } else {
     if (isImage(filename)) {
-      // TODO: Show image preview
+      await terminalImage.file(filename);
     } else {
       showFilePreview(
         filename,
