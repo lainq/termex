@@ -2,7 +2,8 @@ import boxen from "boxen";
 import { greenBright, redBright, rgb } from "chalk";
 import { readFileSync, Stats, statSync } from "fs";
 import { basename } from "path";
-const terminalImage = require("terminal-image");
+import sizeOf from 'image-size'
+import { ISizeCalculationResult } from "image-size/dist/types/interface";
 
 /**
  * Show preview for normal files(files which are not images)
@@ -20,7 +21,9 @@ const showFilePreview = (
     for (let index = 0; index < keys.length; index++) {
       const name: string = keys[index];
       const value: Function = fields.get(name);
-      data.push(`${name}: ${value(filename)}`);
+      const results:any = value(filename)
+      if(!results) continue;
+      data.push(`${name}: ${results}`);
     }
     return data;
   };
@@ -56,27 +59,26 @@ export const previewFiles = async (filename: string): Promise<void> => {
     showFilePreview(filename, stats);
     return;
   } else {
-    if (isImage(filename)) {
-      await terminalImage.file(filename);
-    } else {
-      showFilePreview(
-        filename,
-        stats,
-        new Map<string, Function>([
-          [
-            "Extension",
-            (filename: string): string => {
-              return filename.split(".").slice(-1)[0];
-            },
-          ],
-          [
-            "Size",
-            (filename: string): string => {
-              return `${stats.size} bytes`;
-            },
-          ],
-        ])
-      );
-    }
+    let extraFields:Map<string, Function> = new Map<string, Function>([
+      [
+        "Extension",
+        (filename: string): string => {
+          return filename.split(".").slice(-1)[0];
+        },
+      ],
+      [
+        "Size",
+        (filename: string): string => {
+          return `${stats.size} bytes`;
+        },
+      ],
+      ['Image size', (filename:string):string | undefined => {
+        if(!isImage(filename)) return undefined;
+        const size:ISizeCalculationResult = sizeOf(filename)
+        return `${size.width}x${size.height}`
+      }]
+    ])
+
+    showFilePreview(filename, stats, extraFields)
   }
 };
