@@ -45,10 +45,7 @@ Read the documentation [here](https://github.com/pranavbaburaj/termex/tree/main/
 # Installation
 
 ## Manual installation
-
-# <!--
-
-> > > > > > > 2998139b1abfe027ea417869b0687238ea1444b4
+<!--
 
 - **NPM**
 
