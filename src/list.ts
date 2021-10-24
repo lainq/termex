@@ -1,6 +1,11 @@
 import { readdirSync, readFile, Stats, statSync } from "fs";
 import { dirname, join } from "path";
-import { checkFileExists, clearPreviousLine, File } from "./utils";
+import {
+  checkFileExists,
+  clearPreviousLine,
+  File,
+  FilterFunction,
+} from "./utils";
 import { chdir, cwd } from "process";
 import { CommandLineException } from "./exception";
 import { highlight } from "cli-highlight";
@@ -291,7 +296,10 @@ export class ListFiles {
     this.addedEventListener = true;
   };
 
-  private switchPath = (file?: string): any => {
+  private switchPath = (
+    file?: string,
+    filterFunction?: FilterFunction
+  ): any => {
     if (this.currentFileIndex < 0) {
       return;
     }
@@ -317,6 +325,8 @@ export class ListFiles {
     console.clear();
     this.path = selectedFile;
     this.files = this.createFiles();
+    filterFunction ? this.files.filter(filterFunction) : null;
+    console.log(this.files);
     this.currentFileIndex = -1;
     this.create();
     if (isBinary) {

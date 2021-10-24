@@ -2,6 +2,8 @@ import { existsSync, statSync } from "fs";
 import { stdout } from "process";
 import { clearLine, moveCursor } from "readline";
 
+export type FilterFunction = (value: any) => boolean;
+
 export const clearPreviousLine = () => {
   moveCursor(stdout, 0, -1);
   clearLine(stdout, 1);

@@ -2,7 +2,7 @@ import boxen from "boxen";
 import { greenBright, redBright, rgb } from "chalk";
 import { readFileSync, Stats, statSync } from "fs";
 import { basename } from "path";
-import sizeOf from 'image-size'
+import sizeOf from "image-size";
 import { ISizeCalculationResult } from "image-size/dist/types/interface";
 
 /**
@@ -21,8 +21,8 @@ const showFilePreview = (
     for (let index = 0; index < keys.length; index++) {
       const name: string = keys[index];
       const value: Function = fields.get(name);
-      const results:any = value(filename)
-      if(!results) continue;
+      const results: any = value(filename);
+      if (!results) continue;
       data.push(`${name}: ${results}`);
     }
     return data;
@@ -30,7 +30,7 @@ const showFilePreview = (
   const base: string = basename(filename);
   let displayString: Array<string> = [
     `Name: ${base}`,
-    `Type: Directory`,
+    `Type: ${stats.isDirectory() ? "Directory" : "File"}`,
     `Created at: ${stats.birthtime.toDateString()}`,
   ];
   const extraFieldValues: Array<string> = collectFieldValues();
@@ -59,7 +59,7 @@ export const previewFiles = async (filename: string): Promise<void> => {
     showFilePreview(filename, stats);
     return;
   } else {
-    let extraFields:Map<string, Function> = new Map<string, Function>([
+    let extraFields: Map<string, Function> = new Map<string, Function>([
       [
         "Extension",
         (filename: string): string => {
@@ -72,13 +72,16 @@ export const previewFiles = async (filename: string): Promise<void> => {
           return `${stats.size} bytes`;
         },
       ],
-      ['Image size', (filename:string):string | undefined => {
-        if(!isImage(filename)) return undefined;
-        const size:ISizeCalculationResult = sizeOf(filename)
-        return `${size.width}x${size.height}`
-      }]
-    ])
+      [
+        "Image size",
+        (filename: string): string | undefined => {
+          if (!isImage(filename)) return undefined;
+          const size: ISizeCalculationResult = sizeOf(filename);
+          return `${size.width}x${size.height}`;
+        },
+      ],
+    ]);
 
-    showFilePreview(filename, stats, extraFields)
+    showFilePreview(filename, stats, extraFields);
   }
 };
